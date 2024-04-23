@@ -6,3 +6,4 @@
 *.fatbin
 build/
 .vscode/
+.idea/
