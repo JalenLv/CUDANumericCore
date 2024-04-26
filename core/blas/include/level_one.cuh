@@ -1,0 +1,87 @@
+#ifndef CNCBLAS_LEVEL_ONE_CUH
+#define CNCBLAS_LEVEL_ONE_CUH
+
+/*
+ * Level 1 BLAS
+ */
+
+#include "cuComplex.h"
+
+/*
+ * AMAX: returns the index of the first element of the vector x that has the largest value.
+ * Note: The vector x must be a device pointer.
+ */
+size_t cncblasSamax(size_t n, const float *x);
+size_t cncblasDamax(size_t n, const double *x);
+size_t cncblasCamax(size_t n, const cuComplex *x);
+size_t cncblasZamax(size_t n, const cuDoubleComplex *x);
+
+size_t cncblasSamin(size_t n, const float *x);
+size_t cncblasDamin(size_t n, const double *x);
+size_t cncblasCamin(size_t n, const cuComplex *x);
+size_t cncblasZamin(size_t n, const cuDoubleComplex *x);
+
+float cncblasSasum(size_t n, const float *x);
+double cncblasDasum(size_t n, const double *x);
+float cncblasCasum(size_t n, const cuComplex *x);
+double cncblasZasum(size_t n, const cuDoubleComplex *x);
+
+void cncblasSaxpy(size_t n, const float *alpha, const float *x, const float *y);
+void cncblasDaxpy(size_t n, const double *alpha, const double *x, const double *y);
+void cncblasCaxpy(size_t n, const cuComplex *alpha, const cuComplex *x, const cuComplex *y);
+void cncblasZaxpy(size_t n, const cuDoubleComplex *alpha, const cuDoubleComplex *x, const cuDoubleComplex *y);
+
+void cncblasScopy(size_t n, const float *x, float *y);
+void cncblasDcopy(size_t n, const double *x, double *y);
+void cncblasCcopy(size_t n, const cuComplex *x, cuComplex *y);
+void cncblasZcopy(size_t n, const cuDoubleComplex *x, cuDoubleComplex *y);
+
+float cncblasSdot(size_t n, const float *x, const float *y);
+double cncblasDdot(size_t n, const double *x, const double *y);
+cuComplex cncblasCdotu(size_t n, const cuComplex *x, const cuComplex *y);
+// TODO: cncblasCdotc
+//cuComplex cncblasCdotc(size_t n, const cuComplex *x, const cuComplex *y);
+cuDoubleComplex cncblasZdotu(size_t n, const cuDoubleComplex *x, const cuDoubleComplex *y);
+// TODO: cncblasZdotc
+//cuDoubleComplex cncblasZdotc(size_t n, const cuDoubleComplex *x, const cuDoubleComplex *y);
+
+float cncblasSnrm2(size_t n, const float *x);
+double cncblasDnrm2(size_t n, const double *x);
+float cncblasCnrm2(size_t n, const cuComplex *x);
+double cncblasZnrm2(size_t n, const cuDoubleComplex *x);
+
+void cncblasSrot(size_t n, float *x, float *y, const float *alpha);
+void cncblasDrot(size_t n, double *x, double *y, const double *alpha);
+// TODO: cncblas complex rot
+//void cncblasCrot(size_t n, cuComplex *x, cuComplex *y, const float *c, const cuComplex *s);
+//void cncblasCsrot(size_t n, cuComplex *x, cuComplex *y, const float *c, const float *s);
+//void cncblasZrot(size_t n, cuDoubleComplex *x, cuDoubleComplex *y, const double *c, const cuDoubleComplex *s);
+//void cncblasZdrot(size_t n, cuDoubleComplex *x, cuDoubleComplex *y, const double *c, const double *s);
+
+float *cncblasSrotg(float *a, float *b);
+double *cncblasDrotg(double *a, double *b);
+// TODO: cncblas complex rotg
+//cuComplex *cncblasCrotg(cuComplex *a, cuComplex *b);
+//cuDoubleComplex *cncblasZrotg(cuDoubleComplex *a, cuDoubleComplex *b);
+
+// TODO: cncblas complex rotm
+//void cncblasSrotm(size_t n, float *x, float *y, const float *param);
+//void cncblasDrotm(size_t n, double *x, double *y, const double *param);
+
+// TODO: cncblas complex rotmg
+//void cncblasSrotmg(float *d1, float *d2, float *x1, const float *y1, float *param);
+//void cncblasDrotmg(double *d1, double *d2, double *x1, const double *y1, double *param);
+
+void cncblasSscal(size_t n, const float *alpha, float *x);
+void cncblasDscal(size_t n, const double *alpha, double *x);
+void cncblasCscal(size_t n, const cuComplex *alpha, cuComplex *x);
+void cncblasCsscal(size_t n, const float *alpha, cuComplex *x);
+void cncblasZscal(size_t n, const cuDoubleComplex *alpha, cuDoubleComplex *x);
+void cncblasZdscal(size_t n, const double *alpha, cuDoubleComplex *x);
+
+void cncblasSswap(size_t n, float *x, float *y);
+void cncblasDswap(size_t n, double *x, double *y);
+void cncblasCswap(size_t n, cuComplex *x, cuComplex *y);
+void cncblasZswap(size_t n, cuDoubleComplex *x, cuDoubleComplex *y);
+
+#endif // CNCBLAS_LEVEL_ONE_CUH

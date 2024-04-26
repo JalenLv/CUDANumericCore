@@ -1,1 +1,6 @@
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/blas)
+set(sub_libs
+        "blas")
+
+foreach (sub_lib ${sub_libs})
+  add_subdirectory(${sub_lib})
+endforeach ()

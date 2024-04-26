@@ -1,52 +1,42 @@
+#include "cncblas.cuh"
 #include <iostream>
-#include "cnc_builtin_types.cuh"
+#include <cuComplex.h>
+#include <cublas_v2.h>
+#include <cuda_runtime.h>
 
-__global__ void vecAdd(cncComplex *a, cncComplex *b, cncComplex *c, int n) {
-  int index = threadIdx.x + blockIdx.x * blockDim.x;
-  while (index < n) {
-    c[index] = a[index] + b[index];
-    index += blockDim.x * gridDim.x;
-  }
-}
+#define N (1 << 14)
+#define MAX_NUMBER 5.0
+#define MIN_NUMBER -0.5
 
 int main() {
-  #define N (1 << 14)
-  cncComplex *a, *b, *c;
-  a = (cncComplex *) malloc(N * sizeof(cncComplex));
-  b = (cncComplex *) malloc(N * sizeof(cncComplex));
-  c = (cncComplex *) malloc(N * sizeof(cncComplex));
+  float *x = new float[N];
 
-  cncComplex *d_a, *d_b, *d_c;
-  cudaMalloc(&d_a, N * sizeof(cncComplex));
-  cudaMalloc(&d_b, N * sizeof(cncComplex));
-  cudaMalloc(&d_c, N * sizeof(cncComplex));
-
-  for (cncInt i = 0; i < N; i++) {
-    a[i] = cncComplex(i, i);
-    b[i] = cncComplex(i, i);
+  for (size_t i = 0; i < N; i++) {
+    x[i] = -1.0;
   }
+  x[5678] = MIN_NUMBER;
+  x[1234] = MIN_NUMBER;
 
-  cudaMemcpy(d_a, a, N * sizeof(cncComplex), cudaMemcpyHostToDevice);
-  cudaMemcpy(d_b, b, N * sizeof(cncComplex), cudaMemcpyHostToDevice);
+  float *d_x;
+  cudaMalloc(&d_x, N * sizeof(float));
+  cudaMemcpy(d_x, x, N * sizeof(float), cudaMemcpyHostToDevice);
 
-  vecAdd<<<48, 1024>>>(d_a, d_b, d_c, N);
+  size_t result = cncblasSamin(N, d_x);
 
-  cudaMemcpy(c, d_c, N * sizeof(cncComplex), cudaMemcpyDeviceToHost);
+  std::cout << "The index of the minimum element is: " << result << std::endl;
 
-  for (int i = 0; i < N; i++) {
-    if (c[i].real != 2 * i || c[i].imag != 2 * i) {
-      std::cout << "Error at index " << i << ": " << c[i].real << " + " << c[i].imag << "i" << std::endl;
-      return 1;
-    }
+  // use the official cublas library to verify the result
+  cublasHandle_t handle;
+  cublasCreate(&handle);
+  int cublas_result;
+  int min_index;
+  cublas_result = cublasIsamin(handle, N, d_x, 1, &min_index);
+  if (cublas_result != CUBLAS_STATUS_SUCCESS) {
+    std::cerr << "cublasIsamax failed" << std::endl;
+    return 1;
   }
-  std::cout << "Success!" << std::endl;
-
-  free(a);
-  free(b);
-  free(c);
-  cudaFree(d_a);
-  cudaFree(d_b);
-  cudaFree(d_c);
+  std::cout << "The index of the minimum element is: " << min_index - 1 << std::endl;
+  cublasDestroy(handle);
 
   return 0;
 }

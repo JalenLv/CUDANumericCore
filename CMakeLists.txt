@@ -1,16 +1,20 @@
 cmake_minimum_required(VERSION 3.28)
-project(CUDANumericCore CUDA)
+project(CUDANumericCore LANGUAGES CXX CUDA)
 
 set(CMAKE_CUDA_STANDARD 17)
 
-# add_library(CUDANumericCore SHARED ${CMAKE_CURRENT_SOURCE_DIR}/core/blas/***)
+# Build the core libraries
+add_subdirectory(core)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/common/include)
+# Build the test executable
+add_executable(${PROJECT_NAME} TEST.cu)
 
-add_executable(
-  CUDANumericCore ${CMAKE_CURRENT_SOURCE_DIR}/TEST.cu
-                  ${CMAKE_CURRENT_SOURCE_DIR}/common/src/cnc_builtin_types.cu)
+# Include and link the core libraries
+target_include_directories(${PROJECT_NAME} PUBLIC core/blas)
+target_link_libraries(${PROJECT_NAME} cncblas)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/core)
+# Find and link the cuBLAS library
+find_library(CUBLAS_LIBRARIES cublas PATHS ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
+target_link_libraries(${PROJECT_NAME} ${CUBLAS_LIBRARIES})
 
-set_target_properties(CUDANumericCore PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+set_target_properties(${PROJECT_NAME} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
