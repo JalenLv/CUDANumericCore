@@ -4,6 +4,7 @@
 *.ptx
 *.cubin
 *.fatbin
-build/
 .vscode/
 .idea/
+/cmake-build-release-cuda/
+/cmake-build-debug-cuda/

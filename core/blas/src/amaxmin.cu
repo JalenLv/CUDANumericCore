@@ -7,10 +7,10 @@
 #define MAX_THREADS_PER_SM 2048
 #endif // !MAX_THREADS_PER_SM
 
+/* ----------------------------- AMAX ----------------------------- */
+
 const int BLOCK_SIZE = 256;
 const int GRID_SIZE = 256;
-
-/* ----------------------------- AMAX ----------------------------- */
 
 __global__ void cncblasSamaxKernel(size_t n, const float *x, float *result_data, size_t *result_index) {
   // Calculate the thread index

@@ -1,5 +1,6 @@
 set(sub_libs
-        "blas")
+        "blas"
+)
 
 foreach (sub_lib ${sub_libs})
   add_subdirectory(${sub_lib})
