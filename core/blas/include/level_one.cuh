@@ -7,29 +7,46 @@
 
 #include "cuComplex.h"
 
+/* |-------------------------------------------------------| */
+/* |  Note: The vector x (and y) must be a device pointer. | */
+/* |-------------------------------------------------------| */
+
 /*
- * AMAX: returns the index of the first element of the vector x that has the largest value.
- * Note: The vector x must be a device pointer.
+ * AMAX: returns the index of the first element
+ * of the vector x that has the largest value.
  */
 size_t cncblasSamax(size_t n, const float *x);
 size_t cncblasDamax(size_t n, const double *x);
 size_t cncblasCamax(size_t n, const cuComplex *x);
 size_t cncblasZamax(size_t n, const cuDoubleComplex *x);
 
+/*
+ * AMIN: returns the index of the first element
+ * of the vector x that has the smallest value.
+ */
 size_t cncblasSamin(size_t n, const float *x);
 size_t cncblasDamin(size_t n, const double *x);
 size_t cncblasCamin(size_t n, const cuComplex *x);
 size_t cncblasZamin(size_t n, const cuDoubleComplex *x);
 
+/*
+ * ASUM: computes the sum of the absolute values
+ * of the elements of the vector x.
+ */
 float cncblasSasum(size_t n, const float *x);
 double cncblasDasum(size_t n, const double *x);
 float cncblasCasum(size_t n, const cuComplex *x);
 double cncblasZasum(size_t n, const cuDoubleComplex *x);
 
-void cncblasSaxpy(size_t n, const float *alpha, const float *x, const float *y);
-void cncblasDaxpy(size_t n, const double *alpha, const double *x, const double *y);
-void cncblasCaxpy(size_t n, const cuComplex *alpha, const cuComplex *x, const cuComplex *y);
-void cncblasZaxpy(size_t n, const cuDoubleComplex *alpha, const cuDoubleComplex *x, const cuDoubleComplex *y);
+/*
+ * AXPY: multiplies the vector x by the scalar alpha
+ * and adds it to the vector y, overwriting the y
+ * with the result.
+ */
+void cncblasSaxpy(size_t n, const float *alpha, const float *x, float *y);
+void cncblasDaxpy(size_t n, const double *alpha, const double *x, double *y);
+void cncblasCaxpy(size_t n, const cuComplex *alpha, const cuComplex *x, cuComplex *y);
+void cncblasZaxpy(size_t n, const cuDoubleComplex *alpha, const cuDoubleComplex *x, cuDoubleComplex *y);
 
 void cncblasScopy(size_t n, const float *x, float *y);
 void cncblasDcopy(size_t n, const double *x, double *y);
