@@ -1,9 +1,12 @@
 project(cncblas CUDA)
 
 set(src_files
-        "src/amaxmin.cu"
-        "src/asum.cu"
-        "src/axpy.cu"
+        src/amaxmin.cu
+        src/asum.cu
+        src/axpy.cu
+        src/copy.cu
+        src/dot.cu
+        src/norm2.cu
 )
 
 add_library(${PROJECT_NAME} SHARED ${src_files})
