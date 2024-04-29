@@ -1,5 +1,5 @@
 set(sub_libs
-        "blas"
+        blas
 )
 
 foreach (sub_lib ${sub_libs})
