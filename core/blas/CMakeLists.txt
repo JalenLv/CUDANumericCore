@@ -7,6 +7,7 @@ set(src_files
         src/copy.cu
         src/dot.cu
         src/norm2.cu
+        src/rot.cu
 )
 
 add_library(${PROJECT_NAME} SHARED ${src_files})

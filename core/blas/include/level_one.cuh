@@ -90,8 +90,20 @@ void cncblasDrot(size_t n, double *x, double *y, const double *c, const double *
 // void cncblasZrot(size_t n, cuDoubleComplex *x, cuDoubleComplex *y, const double *c, const cuDoubleComplex *s);
 // void cncblasZdrot(size_t n, cuDoubleComplex *x, cuDoubleComplex *y, const double *c, const double *s);
 
-float *cncblasSrotg(float *a, float *b);
-double *cncblasDrotg(double *a, double *b);
+/*
+ * ROTG: constructs the Givens rotation matrix that
+ * zeros the second entry of the vector (a, b). The
+ * parameters a and b are overwritten by the values
+ * of r and z, respectively. The value of z is such
+ * that c and s may be recovered using the formulas:
+ * (c, s) = (sqrt(1-z^2), z),       if |z| < 1,
+ *        = (0.0, 1.0),             if |z| = 1,
+ *        = (1/z, sqrt(1-1/z^2)),   if |z| > 1.
+ */
+void cncblasSrotg(float *a, float *b, float *alpha);
+void cncblasDrotg(double *a, double *b, double *alpha);
+void cncblasSrotg(float *a, float *b, float *c, float *s);
+void cncblasDrotg(double *a, double *b, double *c, double *s);
 // TODO: cncblas complex rotg
 // cuComplex *cncblasCrotg(cuComplex *a, cuComplex *b);
 // cuDoubleComplex *cncblasZrotg(cuDoubleComplex *a, cuDoubleComplex *b);
