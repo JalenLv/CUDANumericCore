@@ -1,3 +1,12 @@
+#ifndef CNCBLAS_INCLUDE_COMPILER_INTERNAL_HEADERS
+#ifdef _MSC_VER
+#pragma message("blas/include/level_one.cuh is an internal header file and must not be used directly. Please use the public header file blas/cncblas.h instead.")
+#else
+#warning "blas/include/level_one.cuh is an internal header file and must not be used directly. Please use the public header file blas/cncblas.h instead."
+#endif
+#define CNCBLAS_INCLUDE_COMPILER_INTERNAL_HEADERS
+#endif
+
 #ifndef CNCBLAS_LEVEL_ONE_CUH
 #define CNCBLAS_LEVEL_ONE_CUH
 

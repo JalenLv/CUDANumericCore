@@ -1,4 +1,4 @@
-#include <level_one.cuh>
+#include <../cncblas.h>
 #include <iostream>
 #include <stdexcept>
 

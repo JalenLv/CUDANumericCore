@@ -1,4 +1,4 @@
-#include "cncblas.cuh"
+#include "cncblas.h"
 #include <iostream>
 #include <cuComplex.h>
 #include <cublas_v2.h>
@@ -44,6 +44,16 @@ int main() {
     std::cout << "PASSED" << std::endl;
   } else {
     std::cout << "FAILED" << std::endl;
+  }
+
+  cudaPointerAttributes attributes;
+  cudaPointerGetAttributes(&attributes, x);
+  if (attributes.type == cudaMemoryTypeManaged) {
+    std::cout << "x is managed memory" << std::endl;
+  } else if (attributes.type == cudaMemoryTypeDevice) {
+    std::cout << "x is device memory" << std::endl;
+  } else if (attributes.type == cudaMemoryTypeHost) {
+    std::cout << "x is host memory" << std::endl;
   }
 
   return 0;
