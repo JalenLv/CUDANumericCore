@@ -85,9 +85,9 @@ float cncblasSdot(size_t n, const float *x, const float *y) {
 
   // assign memory for result
   float *d_result_phaes1;
-  cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(float)));
   float *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(float)));
 
   // launch kernel
   cncblasSdotKernel_1<<<GRID_SIZE, BLOCK_SIZE>>>(n, x, y, d_result_phaes1);
@@ -95,11 +95,11 @@ float cncblasSdot(size_t n, const float *x, const float *y) {
 
   // save result
   float result;
-  cudaMemcpy(&result, d_result_phase2, sizeof(float), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(&result, d_result_phase2, sizeof(float), cudaMemcpyDeviceToHost));
 
   // free memory
-  cudaFree(d_result_phaes1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phaes1));
+  checkCudaErrors(cudaFree(d_result_phase2));
 
   return result;
 }
@@ -181,9 +181,9 @@ double cncblasDdot(size_t n, const double *x, const double *y) {
 
   // assign memory for result
   double *d_result_phaes1;
-  cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(double)));
   double *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(double)));
 
   // launch kernel
   cncblasDdotKernel_1<<<GRID_SIZE, BLOCK_SIZE>>>(n, x, y, d_result_phaes1);
@@ -191,11 +191,11 @@ double cncblasDdot(size_t n, const double *x, const double *y) {
 
   // save result
   double result;
-  cudaMemcpy(&result, d_result_phase2, sizeof(double), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(&result, d_result_phase2, sizeof(double), cudaMemcpyDeviceToHost));
 
   // free memory
-  cudaFree(d_result_phaes1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phaes1));
+  checkCudaErrors(cudaFree(d_result_phase2));
 
   return result;
 }
@@ -278,9 +278,9 @@ cuComplex cncblasCdotu(size_t n, const cuComplex *x, const cuComplex *y) {
 
   // assign memory for result
   cuComplex *d_result_phaes1;
-  cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(cuComplex));
+  checkCudaErrors(cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(cuComplex)));
   cuComplex *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(cuComplex));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(cuComplex)));
 
   // launch kernel
   cncblasCdotuKernel_1<<<GRID_SIZE, BLOCK_SIZE>>>(n, x, y, d_result_phaes1);
@@ -288,11 +288,11 @@ cuComplex cncblasCdotu(size_t n, const cuComplex *x, const cuComplex *y) {
 
   // save result
   cuComplex result;
-  cudaMemcpy(&result, d_result_phase2, sizeof(cuComplex), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(&result, d_result_phase2, sizeof(cuComplex), cudaMemcpyDeviceToHost));
 
   // free memory
-  cudaFree(d_result_phaes1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phaes1));
+  checkCudaErrors(cudaFree(d_result_phase2));
 
   return result;
 }
@@ -376,9 +376,9 @@ cuDoubleComplex cncblasZdotu(size_t n, const cuDoubleComplex *x, const cuDoubleC
 
   // assign memory for result
   cuDoubleComplex *d_result_phaes1;
-  cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(cuDoubleComplex));
+  checkCudaErrors(cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(cuDoubleComplex)));
   cuDoubleComplex *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(cuDoubleComplex));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(cuDoubleComplex)));
 
   // launch kernel
   cncblasZdotuKernel_1<<<GRID_SIZE, BLOCK_SIZE>>>(n, x, y, d_result_phaes1);
@@ -386,11 +386,11 @@ cuDoubleComplex cncblasZdotu(size_t n, const cuDoubleComplex *x, const cuDoubleC
 
   // save result
   cuDoubleComplex result;
-  cudaMemcpy(&result, d_result_phase2, sizeof(cuDoubleComplex), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(&result, d_result_phase2, sizeof(cuDoubleComplex), cudaMemcpyDeviceToHost));
 
   // free memory
-  cudaFree(d_result_phaes1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phaes1));
+  checkCudaErrors(cudaFree(d_result_phase2));
 
   return result;
 }
@@ -473,9 +473,9 @@ cuComplex cncblasCdotc(size_t n, const cuComplex *x, const cuComplex *y) {
 
   // assign memory for result
   cuComplex *d_result_phaes1;
-  cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(cuComplex));
+  checkCudaErrors(cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(cuComplex)));
   cuComplex *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(cuComplex));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(cuComplex)));
 
   // launch kernel
   cncblasCdotcKernel_1<<<GRID_SIZE, BLOCK_SIZE>>>(n, x, y, d_result_phaes1);
@@ -483,11 +483,11 @@ cuComplex cncblasCdotc(size_t n, const cuComplex *x, const cuComplex *y) {
 
   // save result
   cuComplex result;
-  cudaMemcpy(&result, d_result_phase2, sizeof(cuComplex), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(&result, d_result_phase2, sizeof(cuComplex), cudaMemcpyDeviceToHost));
 
   // free memory
-  cudaFree(d_result_phaes1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phaes1));
+  checkCudaErrors(cudaFree(d_result_phase2));
 
   return result;
 }
@@ -571,9 +571,9 @@ cuDoubleComplex cncblasZdotc(size_t n, const cuDoubleComplex *x, const cuDoubleC
 
   // assign memory for result
   cuDoubleComplex *d_result_phaes1;
-  cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(cuDoubleComplex));
+  checkCudaErrors(cudaMalloc(&d_result_phaes1, GRID_SIZE * sizeof(cuDoubleComplex)));
   cuDoubleComplex *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(cuDoubleComplex));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(cuDoubleComplex)));
 
   // launch kernel
   cncblasZdotcKernel_1<<<GRID_SIZE, BLOCK_SIZE>>>(n, x, y, d_result_phaes1);
@@ -581,11 +581,11 @@ cuDoubleComplex cncblasZdotc(size_t n, const cuDoubleComplex *x, const cuDoubleC
 
   // save result
   cuDoubleComplex result;
-  cudaMemcpy(&result, d_result_phase2, sizeof(cuDoubleComplex), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(&result, d_result_phase2, sizeof(cuDoubleComplex), cudaMemcpyDeviceToHost));
 
   // free memory
-  cudaFree(d_result_phaes1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phaes1));
+  checkCudaErrors(cudaFree(d_result_phase2));
 
   return result;
 }

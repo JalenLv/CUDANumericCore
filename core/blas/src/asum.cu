@@ -55,9 +55,10 @@ float cncblasSasum(size_t n, const float *x) {
 
   // Allocate memory for result
   float *d_result_phase1;
-  cudaMalloc(&d_result_phase1, BLOCK_SIZE * sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_result_phase1,
+                             BLOCK_SIZE * sizeof(float)));
   float *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(float)));
   float *h_result_phase2 = new float;
 
   // Launch kernel
@@ -65,14 +66,14 @@ float cncblasSasum(size_t n, const float *x) {
   cncblasSasumKernel<<<1, GRID_SIZE>>>(GRID_SIZE, d_result_phase1, d_result_phase2);
 
   // Copy result back to host
-  cudaMemcpy(h_result_phase2, d_result_phase2, sizeof(float), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_result_phase2, d_result_phase2, sizeof(float), cudaMemcpyDeviceToHost));
 
   // Save result
   float result = *h_result_phase2;
 
   // Free memory
-  cudaFree(d_result_phase1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phase1));
+  checkCudaErrors(cudaFree(d_result_phase2));
   delete h_result_phase2;
 
   return result;
@@ -125,9 +126,9 @@ double cncblasDasum(size_t n, const double *x) {
 
   // Allocate memory for result
   double *d_result_phase1;
-  cudaMalloc(&d_result_phase1, BLOCK_SIZE * sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_result_phase1, BLOCK_SIZE * sizeof(double)));
   double *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(double)));
   double *h_result_phase2 = new double;
 
   // Launch kernel
@@ -135,14 +136,14 @@ double cncblasDasum(size_t n, const double *x) {
   cncblasDasumKernel<<<1, GRID_SIZE>>>(GRID_SIZE, d_result_phase1, d_result_phase2);
 
   // Copy result back to host
-  cudaMemcpy(h_result_phase2, d_result_phase2, sizeof(double), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_result_phase2, d_result_phase2, sizeof(double), cudaMemcpyDeviceToHost));
 
   // Save result
   double result = *h_result_phase2;
 
   // Free memory
-  cudaFree(d_result_phase1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phase1));
+  checkCudaErrors(cudaFree(d_result_phase2));
   delete h_result_phase2;
 
   return result;
@@ -195,9 +196,9 @@ float cncblasCasum(size_t n, const cuComplex *x) {
 
   // Allocate memory for result
   float *d_result_phase1;
-  cudaMalloc(&d_result_phase1, BLOCK_SIZE * sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_result_phase1, BLOCK_SIZE * sizeof(float)));
   float *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(float)));
   float *h_result_phase2 = new float;
 
   // Launch kernel
@@ -205,14 +206,14 @@ float cncblasCasum(size_t n, const cuComplex *x) {
   cncblasSasumKernel<<<1, GRID_SIZE>>>(GRID_SIZE, d_result_phase1, d_result_phase2);
 
   // Copy result back to host
-  cudaMemcpy(h_result_phase2, d_result_phase2, sizeof(float), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_result_phase2, d_result_phase2, sizeof(float), cudaMemcpyDeviceToHost));
 
   // Save result
   float result = *h_result_phase2;
 
   // Free memory
-  cudaFree(d_result_phase1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phase1));
+  checkCudaErrors(cudaFree(d_result_phase2));
   delete h_result_phase2;
 
   return result;
@@ -265,9 +266,9 @@ double cncblasZasum(size_t n, const cuDoubleComplex *x) {
 
   // Allocate memory for result
   double *d_result_phase1;
-  cudaMalloc(&d_result_phase1, BLOCK_SIZE * sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_result_phase1, BLOCK_SIZE * sizeof(double)));
   double *d_result_phase2;
-  cudaMalloc(&d_result_phase2, sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_result_phase2, sizeof(double)));
   double *h_result_phase2 = new double;
 
   // Launch kernel
@@ -275,14 +276,14 @@ double cncblasZasum(size_t n, const cuDoubleComplex *x) {
   cncblasDasumKernel<<<1, GRID_SIZE>>>(GRID_SIZE, d_result_phase1, d_result_phase2);
 
   // Copy result back to host
-  cudaMemcpy(h_result_phase2, d_result_phase2, sizeof(double), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_result_phase2, d_result_phase2, sizeof(double), cudaMemcpyDeviceToHost));
 
   // Save result
   double result = *h_result_phase2;
 
   // Free memory
-  cudaFree(d_result_phase1);
-  cudaFree(d_result_phase2);
+  checkCudaErrors(cudaFree(d_result_phase1));
+  checkCudaErrors(cudaFree(d_result_phase2));
   delete h_result_phase2;
 
   return result;

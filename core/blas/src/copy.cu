@@ -18,7 +18,7 @@ void cncblasScopy(size_t n, const float *x, float *y) {
     exit(1);
   }
 
-  cudaMemcpy(y, x, n * sizeof(float), cudaMemcpyDeviceToDevice);
+  checkCudaErrors(cudaMemcpy(y, x, n * sizeof(float), cudaMemcpyDeviceToDevice));
 }
 
 void cncblasDcopy(size_t n, const double *x, double *y) {
@@ -35,7 +35,7 @@ void cncblasDcopy(size_t n, const double *x, double *y) {
     exit(1);
   }
 
-  cudaMemcpy(y, x, n * sizeof(double), cudaMemcpyDeviceToDevice);
+  checkCudaErrors(cudaMemcpy(y, x, n * sizeof(double), cudaMemcpyDeviceToDevice));
 }
 
 void cncblasCcopy(size_t n, const cuComplex *x, cuComplex *y) {
@@ -52,7 +52,7 @@ void cncblasCcopy(size_t n, const cuComplex *x, cuComplex *y) {
     exit(1);
   }
 
-  cudaMemcpy(y, x, n * sizeof(cuComplex), cudaMemcpyDeviceToDevice);
+  checkCudaErrors(cudaMemcpy(y, x, n * sizeof(cuComplex), cudaMemcpyDeviceToDevice));
 }
 
 void cncblasZcopy(size_t n, const cuDoubleComplex *x, cuDoubleComplex *y) {
@@ -69,5 +69,5 @@ void cncblasZcopy(size_t n, const cuDoubleComplex *x, cuDoubleComplex *y) {
     exit(1);
   }
 
-  cudaMemcpy(y, x, n * sizeof(cuDoubleComplex), cudaMemcpyDeviceToDevice);
+  checkCudaErrors(cudaMemcpy(y, x, n * sizeof(cuDoubleComplex), cudaMemcpyDeviceToDevice));
 }

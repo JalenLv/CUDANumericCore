@@ -15,8 +15,8 @@ int main() {
 
   // Initialize the vectors
   float *x, *y;
-  cudaMallocManaged(&x, N * sizeof(float));
-  cudaMallocManaged(&y, N * sizeof(float));
+  checkCudaErrors(cudaMallocManaged(&x, N * sizeof(float)));
+  checkCudaErrors(cudaMallocManaged(&y, N * sizeof(float)));
 
   for (size_t i = 0; i < N; i++) {
     x[i] = i;

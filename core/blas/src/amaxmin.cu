@@ -64,14 +64,14 @@ size_t cncblasSamax(size_t n, const float *x) {
   float *d_data_phase1;
   size_t *d_index_phase1;
   size_t *h_index_phase1 = new size_t[GRID_SIZE];
-  cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(float));
-  cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(float)));
+  checkCudaErrors(cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t)));
 
   float *d_data_phase2;
-  cudaMalloc(&d_data_phase2, 1 * sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_data_phase2, 1 * sizeof(float)));
   size_t *h_index_phase2 = new size_t;
   size_t *d_index_phase2;
-  cudaMalloc(&d_index_phase2, 1 * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_index_phase2, 1 * sizeof(size_t)));
 
   // Launch the kernel
   cncblasSamaxKernel<<<GRID_SIZE, BLOCK_SIZE>>>
@@ -80,19 +80,19 @@ size_t cncblasSamax(size_t n, const float *x) {
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
-  cudaMemcpy(h_index_phase1, d_index_phase1,
-             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_index_phase2, d_index_phase2,
-             1 * sizeof(size_t), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_index_phase1, d_index_phase1,
+                             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_index_phase2, d_index_phase2,
+                             1 * sizeof(size_t), cudaMemcpyDeviceToHost));
 
   // Find the maximum element
   size_t result = h_index_phase1[h_index_phase2[0]];
 
   // Free memory
-  cudaFree(d_data_phase1);
-  cudaFree(d_index_phase1);
-  cudaFree(d_data_phase2);
-  cudaFree(d_index_phase2);
+  checkCudaErrors(cudaFree(d_data_phase1));
+  checkCudaErrors(cudaFree(d_index_phase1));
+  checkCudaErrors(cudaFree(d_data_phase2));
+  checkCudaErrors(cudaFree(d_index_phase2));
   delete[] h_index_phase1;
   delete h_index_phase2;
 
@@ -151,14 +151,14 @@ size_t cncblasDamax(size_t n, const double *x) {
   double *d_data_phase1;
   size_t *d_index_phase1;
   size_t *h_index_phase1 = new size_t[GRID_SIZE];
-  cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(double));
-  cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(double)));
+  checkCudaErrors(cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t)));
 
   double *d_data_phase2;
-  cudaMalloc(&d_data_phase2, 1 * sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_data_phase2, 1 * sizeof(double)));
   size_t *h_index_phase2 = new size_t;
   size_t *d_index_phase2;
-  cudaMalloc(&d_index_phase2, 1 * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_index_phase2, 1 * sizeof(size_t)));
 
   // Launch the kernel
   cncblasDamaxKernel<<<GRID_SIZE, BLOCK_SIZE>>>
@@ -167,19 +167,19 @@ size_t cncblasDamax(size_t n, const double *x) {
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
-  cudaMemcpy(h_index_phase1, d_index_phase1,
-             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_index_phase2, d_index_phase2,
-             1 * sizeof(size_t), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_index_phase1, d_index_phase1,
+                             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_index_phase2, d_index_phase2,
+                             1 * sizeof(size_t), cudaMemcpyDeviceToHost));
 
   // Find the maximum element
   size_t result = h_index_phase1[h_index_phase2[0]];
 
   // Free memory
-  cudaFree(d_data_phase1);
-  cudaFree(d_index_phase1);
-  cudaFree(d_data_phase2);
-  cudaFree(d_index_phase2);
+  checkCudaErrors(cudaFree(d_data_phase1));
+  checkCudaErrors(cudaFree(d_index_phase1));
+  checkCudaErrors(cudaFree(d_data_phase2));
+  checkCudaErrors(cudaFree(d_index_phase2));
   delete[] h_index_phase1;
   delete h_index_phase2;
 
@@ -238,14 +238,14 @@ size_t cncblasCamax(size_t n, const cuComplex *x) {
   float *d_data_phase1;
   size_t *d_index_phase1;
   size_t *h_index_phase1 = new size_t[GRID_SIZE];
-  cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(float));
-  cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(float)));
+  checkCudaErrors(cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t)));
 
   float *d_data_phase2;
-  cudaMalloc(&d_data_phase2, 1 * sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_data_phase2, 1 * sizeof(float)));
   size_t *h_index_phase2 = new size_t;
   size_t *d_index_phase2;
-  cudaMalloc(&d_index_phase2, 1 * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_index_phase2, 1 * sizeof(size_t)));
 
   // Launch the kernel
   cncblasCamaxKernel<<<GRID_SIZE, BLOCK_SIZE>>>
@@ -254,19 +254,19 @@ size_t cncblasCamax(size_t n, const cuComplex *x) {
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
-  cudaMemcpy(h_index_phase1, d_index_phase1,
-             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_index_phase2, d_index_phase2,
-             1 * sizeof(size_t), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_index_phase1, d_index_phase1,
+                             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_index_phase2, d_index_phase2,
+                             1 * sizeof(size_t), cudaMemcpyDeviceToHost));
 
   // Find the maximum element
   size_t result = h_index_phase1[h_index_phase2[0]];
 
   // Free memory
-  cudaFree(d_data_phase1);
-  cudaFree(d_index_phase1);
-  cudaFree(d_data_phase2);
-  cudaFree(d_index_phase2);
+  checkCudaErrors(cudaFree(d_data_phase1));
+  checkCudaErrors(cudaFree(d_index_phase1));
+  checkCudaErrors(cudaFree(d_data_phase2));
+  checkCudaErrors(cudaFree(d_index_phase2));
   delete[] h_index_phase1;
   delete h_index_phase2;
 
@@ -325,14 +325,14 @@ size_t cncblasZamax(size_t n, const cuDoubleComplex *x) {
   double *d_data_phase1;
   size_t *d_index_phase1;
   size_t *h_index_phase1 = new size_t[GRID_SIZE];
-  cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(double));
-  cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(double)));
+  checkCudaErrors(cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t)));
 
   double *d_data_phase2;
-  cudaMalloc(&d_data_phase2, 1 * sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_data_phase2, 1 * sizeof(double)));
   size_t *h_index_phase2 = new size_t;
   size_t *d_index_phase2;
-  cudaMalloc(&d_index_phase2, 1 * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_index_phase2, 1 * sizeof(size_t)));
 
   // Launch the kernel
   cncblasZamaxKernel<<<GRID_SIZE, BLOCK_SIZE>>>
@@ -341,19 +341,19 @@ size_t cncblasZamax(size_t n, const cuDoubleComplex *x) {
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
-  cudaMemcpy(h_index_phase1, d_index_phase1,
-             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_index_phase2, d_index_phase2,
-             1 * sizeof(size_t), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_index_phase1, d_index_phase1,
+                             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_index_phase2, d_index_phase2,
+                             1 * sizeof(size_t), cudaMemcpyDeviceToHost));
 
   // Find the maximum element
   size_t result = h_index_phase1[h_index_phase2[0]];
 
   // Free memory
-  cudaFree(d_data_phase1);
-  cudaFree(d_index_phase1);
-  cudaFree(d_data_phase2);
-  cudaFree(d_index_phase2);
+  checkCudaErrors(cudaFree(d_data_phase1));
+  checkCudaErrors(cudaFree(d_index_phase1));
+  checkCudaErrors(cudaFree(d_data_phase2));
+  checkCudaErrors(cudaFree(d_index_phase2));
   delete[] h_index_phase1;
   delete h_index_phase2;
 
@@ -414,14 +414,14 @@ size_t cncblasSamin(size_t n, const float *x) {
   float *d_data_phase1;
   size_t *d_index_phase1;
   size_t *h_index_phase1 = new size_t[GRID_SIZE];
-  cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(float));
-  cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(float)));
+  checkCudaErrors(cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t)));
 
   float *d_data_phase2;
-  cudaMalloc(&d_data_phase2, 1 * sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_data_phase2, 1 * sizeof(float)));
   size_t *h_index_phase2 = new size_t;
   size_t *d_index_phase2;
-  cudaMalloc(&d_index_phase2, 1 * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_index_phase2, 1 * sizeof(size_t)));
 
   // Launch the kernel
   cncblasSaminKernel<<<GRID_SIZE, BLOCK_SIZE>>>
@@ -430,19 +430,19 @@ size_t cncblasSamin(size_t n, const float *x) {
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
-  cudaMemcpy(h_index_phase1, d_index_phase1,
-             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_index_phase2, d_index_phase2,
-             1 * sizeof(size_t), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_index_phase1, d_index_phase1,
+                             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_index_phase2, d_index_phase2,
+                             1 * sizeof(size_t), cudaMemcpyDeviceToHost));
 
   // Find the minimum element
   size_t result = h_index_phase1[h_index_phase2[0]];
 
   // Free memory
-  cudaFree(d_data_phase1);
-  cudaFree(d_index_phase1);
-  cudaFree(d_data_phase2);
-  cudaFree(d_index_phase2);
+  checkCudaErrors(cudaFree(d_data_phase1));
+  checkCudaErrors(cudaFree(d_index_phase1));
+  checkCudaErrors(cudaFree(d_data_phase2));
+  checkCudaErrors(cudaFree(d_index_phase2));
   delete[] h_index_phase1;
   delete h_index_phase2;
 
@@ -501,14 +501,14 @@ size_t cncblasDamin(size_t n, const double *x) {
   double *d_data_phase1;
   size_t *d_index_phase1;
   size_t *h_index_phase1 = new size_t[GRID_SIZE];
-  cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(double));
-  cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(double)));
+  checkCudaErrors(cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t)));
 
   double *d_data_phase2;
-  cudaMalloc(&d_data_phase2, 1 * sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_data_phase2, 1 * sizeof(double)));
   size_t *h_index_phase2 = new size_t;
   size_t *d_index_phase2;
-  cudaMalloc(&d_index_phase2, 1 * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_index_phase2, 1 * sizeof(size_t)));
 
   // Launch the kernel
   cncblasDaminKernel<<<GRID_SIZE, BLOCK_SIZE>>>
@@ -517,19 +517,19 @@ size_t cncblasDamin(size_t n, const double *x) {
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
-  cudaMemcpy(h_index_phase1, d_index_phase1,
-             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_index_phase2, d_index_phase2,
-             1 * sizeof(size_t), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_index_phase1, d_index_phase1,
+                             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_index_phase2, d_index_phase2,
+                             1 * sizeof(size_t), cudaMemcpyDeviceToHost));
 
   // Find the minimum element
   size_t result = h_index_phase1[h_index_phase2[0]];
 
   // Free memory
-  cudaFree(d_data_phase1);
-  cudaFree(d_index_phase1);
-  cudaFree(d_data_phase2);
-  cudaFree(d_index_phase2);
+  checkCudaErrors(cudaFree(d_data_phase1));
+  checkCudaErrors(cudaFree(d_index_phase1));
+  checkCudaErrors(cudaFree(d_data_phase2));
+  checkCudaErrors(cudaFree(d_index_phase2));
   delete[] h_index_phase1;
   delete h_index_phase2;
 
@@ -588,14 +588,14 @@ size_t cncblasCamin(size_t n, const cuComplex *x) {
   float *d_data_phase1;
   size_t *d_index_phase1;
   size_t *h_index_phase1 = new size_t[GRID_SIZE];
-  cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(float));
-  cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(float)));
+  checkCudaErrors(cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t)));
 
   float *d_data_phase2;
-  cudaMalloc(&d_data_phase2, 1 * sizeof(float));
+  checkCudaErrors(cudaMalloc(&d_data_phase2, 1 * sizeof(float)));
   size_t *h_index_phase2 = new size_t;
   size_t *d_index_phase2;
-  cudaMalloc(&d_index_phase2, 1 * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_index_phase2, 1 * sizeof(size_t)));
 
   // Launch the kernel
   cncblasCaminKernel<<<GRID_SIZE, BLOCK_SIZE>>>
@@ -604,19 +604,19 @@ size_t cncblasCamin(size_t n, const cuComplex *x) {
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
-  cudaMemcpy(h_index_phase1, d_index_phase1,
-             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_index_phase2, d_index_phase2,
-             1 * sizeof(size_t), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_index_phase1, d_index_phase1,
+                             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_index_phase2, d_index_phase2,
+                             1 * sizeof(size_t), cudaMemcpyDeviceToHost));
 
   // Find the minimum element
   size_t result = h_index_phase1[h_index_phase2[0]];
 
   // Free memory
-  cudaFree(d_data_phase1);
-  cudaFree(d_index_phase1);
-  cudaFree(d_data_phase2);
-  cudaFree(d_index_phase2);
+  checkCudaErrors(cudaFree(d_data_phase1));
+  checkCudaErrors(cudaFree(d_index_phase1));
+  checkCudaErrors(cudaFree(d_data_phase2));
+  checkCudaErrors(cudaFree(d_index_phase2));
   delete[] h_index_phase1;
   delete h_index_phase2;
 
@@ -675,14 +675,14 @@ size_t cncblasZamin(size_t n, const cuDoubleComplex *x) {
   double *d_data_phase1;
   size_t *d_index_phase1;
   size_t *h_index_phase1 = new size_t[GRID_SIZE];
-  cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(double));
-  cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_data_phase1, GRID_SIZE * sizeof(double)));
+  checkCudaErrors(cudaMalloc(&d_index_phase1, GRID_SIZE * sizeof(size_t)));
 
   double *d_data_phase2;
-  cudaMalloc(&d_data_phase2, 1 * sizeof(double));
+  checkCudaErrors(cudaMalloc(&d_data_phase2, 1 * sizeof(double)));
   size_t *h_index_phase2 = new size_t;
   size_t *d_index_phase2;
-  cudaMalloc(&d_index_phase2, 1 * sizeof(size_t));
+  checkCudaErrors(cudaMalloc(&d_index_phase2, 1 * sizeof(size_t)));
 
   // Launch the kernel
   cncblasZaminKernel<<<GRID_SIZE, BLOCK_SIZE>>>
@@ -691,19 +691,19 @@ size_t cncblasZamin(size_t n, const cuDoubleComplex *x) {
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
-  cudaMemcpy(h_index_phase1, d_index_phase1,
-             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_index_phase2, d_index_phase2,
-             1 * sizeof(size_t), cudaMemcpyDeviceToHost);
+  checkCudaErrors(cudaMemcpy(h_index_phase1, d_index_phase1,
+                             GRID_SIZE * sizeof(size_t), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_index_phase2, d_index_phase2,
+                             1 * sizeof(size_t), cudaMemcpyDeviceToHost));
 
   // Find the minimum element
   size_t result = h_index_phase1[h_index_phase2[0]];
 
   // Free memory
-  cudaFree(d_data_phase1);
-  cudaFree(d_index_phase1);
-  cudaFree(d_data_phase2);
-  cudaFree(d_index_phase2);
+  checkCudaErrors(cudaFree(d_data_phase1));
+  checkCudaErrors(cudaFree(d_index_phase1));
+  checkCudaErrors(cudaFree(d_data_phase2));
+  checkCudaErrors(cudaFree(d_index_phase2));
   delete[] h_index_phase1;
   delete h_index_phase2;
 
