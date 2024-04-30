@@ -116,6 +116,10 @@ void cncblasDrotg(double *a, double *b, double *c, double *s);
 // void cncblasSrotmg(float *d1, float *d2, float *x1, const float *y1, float *param);
 // void cncblasDrotmg(double *d1, double *d2, double *x1, const double *y1, double *param);
 
+/*
+ * SCAL: scales the vector x by the scalar alpha
+ * and overwrites the vector x with the result.
+ */
 void cncblasSscal(size_t n, const float *alpha, float *x);
 void cncblasDscal(size_t n, const double *alpha, double *x);
 void cncblasCscal(size_t n, const cuComplex *alpha, cuComplex *x);
