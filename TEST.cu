@@ -9,6 +9,17 @@
 
 const float PI = 3.14159265358979323846;
 
+__global__ void kernel(float *x) {
+  cudaMemoryType type = getMemoryType(x);
+  if (type == cudaMemoryTypeManaged) {
+    printf("x is managed memory\n");
+  } else if (type == cudaMemoryTypeDevice) {
+    printf("x is device memory\n");
+  } else if (type == cudaMemoryTypeHost) {
+    printf("x is host memory\n");
+  }
+}
+
 int main() {
   // Test the SWAP function, and use cublas
   // to verify the results
@@ -55,6 +66,17 @@ int main() {
   } else if (attributes.type == cudaMemoryTypeHost) {
     std::cout << "x is host memory" << std::endl;
   }
+
+  cudaMemoryType type = getMemoryType(x);
+  if (type == cudaMemoryTypeManaged) {
+    std::cout << "x is managed memory" << std::endl;
+  } else if (type == cudaMemoryTypeDevice) {
+    std::cout << "x is device memory" << std::endl;
+  } else if (type == cudaMemoryTypeHost) {
+    std::cout << "x is host memory" << std::endl;
+  }
+
+  kernel<<<1, 1>>>(x);
 
   return 0;
 }

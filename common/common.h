@@ -19,7 +19,7 @@
 #define checkCudaErrors(err) __checkCudaErrors(err, __FILE__, __LINE__)
 
 // These are the inline versions for all the SDK helper functions
-inline void __checkCudaErrors(CUresult err, const char *file, const int line) {
+static inline void __checkCudaErrors(CUresult err, const char *file, const int line) {
   if (err != CUDA_SUCCESS) {
     const char *errorString = nullptr;
     cuGetErrorString(err, &errorString);
@@ -31,7 +31,7 @@ inline void __checkCudaErrors(CUresult err, const char *file, const int line) {
   }
 }
 
-inline void __checkCudaErrors(cudaError_t err, const char *file, const int line) {
+static inline void __checkCudaErrors(cudaError_t err, const char *file, const int line) {
   if (err != cudaSuccess) {
     const char *errorString;
     errorString = cudaGetErrorString(err);
@@ -44,5 +44,13 @@ inline void __checkCudaErrors(cudaError_t err, const char *file, const int line)
 }
 
 #endif
+
+/* Get the location of memory pointed to by a pointer. */
+__host__ __device__ static inline cudaMemoryType getMemoryType(const void *ptr) {
+  cudaPointerAttributes attributes;
+  cudaPointerGetAttributes(&attributes, ptr);
+  return attributes.type;
+}
+
 
 #endif //CNC_COMMON_H
