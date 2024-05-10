@@ -50,7 +50,7 @@ static inline void __checkCudaErrors(cudaError_t err, const char *file, const in
  */
 #include <cuda_runtime.h>
 
-__host__ __device__ static inline cudaMemoryType getMemoryType(const void *ptr) {
+__host__ static inline cudaMemoryType getMemoryType(const void *ptr) {
   cudaPointerAttributes attributes;
   cudaPointerGetAttributes(&attributes, ptr);
   return attributes.type;
