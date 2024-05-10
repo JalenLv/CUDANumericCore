@@ -5,7 +5,7 @@
 /* |  Note: The vectors x and y must be device pointers.  | */
 /* |------------------------------------------------------| */
 
-#include "../../common/common.h"
+#include "include/common.h"
 
 #include "include/level_one.h"
 #include "include/level_two.h"

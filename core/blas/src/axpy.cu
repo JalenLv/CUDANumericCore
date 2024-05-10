@@ -1,4 +1,4 @@
-#include <../cncblas.h>
+#include "../cncblas.h"
 #include <cuComplex.h>
 #include <stdexcept>
 #include <iostream>

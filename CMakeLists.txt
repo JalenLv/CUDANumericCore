@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.28)
-project(CUDANumericCore LANGUAGES CXX CUDA)
+project(CUDANumericCore LANGUAGES CXX)
 
+set(CMAKE_CUDA_ARCHITECTURES 80 89)
+set(CMAKE_CUDA_COMPILER /usr/local/cuda/bin/nvcc)
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -lineinfo")
 set(CMAKE_CUDA_STANDARD 17)
+enable_language(CUDA)
+
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Build the core libraries
 add_subdirectory(core)

@@ -1,4 +1,4 @@
-#include <../cncblas.h>
+#include "../cncblas.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -6,7 +6,7 @@
 
 const size_t BLOCK_SIZE = 256;
 
-__global__ void cnblasSscalKernel(size_t n, const float *alpha, float *x) {
+__global__ void cncblasSscalKernel(size_t n, const float *alpha, float *x) {
   size_t i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n) {
     x[i] *= *alpha;
@@ -32,10 +32,10 @@ void cncblasSscal(size_t n, const float *alpha, float *x) {
 
   // Launch the kernel
   size_t GRID_SIZE = (n + BLOCK_SIZE - 1) / BLOCK_SIZE;
-  cnblasSscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
+  cncblasSscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
 }
 
-__global__ void cnblasDscalKernel(size_t n, const double *alpha, double *x) {
+__global__ void cncblasDscalKernel(size_t n, const double *alpha, double *x) {
   size_t i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n) {
     x[i] *= *alpha;
@@ -61,10 +61,10 @@ void cncblasDscal(size_t n, const double *alpha, double *x) {
 
   // Launch the kernel
   size_t GRID_SIZE = (n + BLOCK_SIZE - 1) / BLOCK_SIZE;
-  cnblasDscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
+  cncblasDscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
 }
 
-__global__ void cnblasCscalKernel(size_t n, const cuComplex *alpha, cuComplex *x) {
+__global__ void cncblasCscalKernel(size_t n, const cuComplex *alpha, cuComplex *x) {
   size_t i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n) {
     x[i] = cuCmulf(x[i], *alpha);
@@ -90,10 +90,10 @@ void cncblasCscal(size_t n, const cuComplex *alpha, cuComplex *x) {
 
   // Launch the kernel
   size_t GRID_SIZE = (n + BLOCK_SIZE - 1) / BLOCK_SIZE;
-  cnblasCscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
+  cncblasCscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
 }
 
-__global__ void cnblasCsscalKernel(size_t n, const float *alpha, cuComplex *x) {
+__global__ void cncblasCsscalKernel(size_t n, const float *alpha, cuComplex *x) {
   size_t i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n) {
     x[i] = cuCmulf(x[i], make_cuComplex(*alpha, 0.0f));
@@ -119,10 +119,10 @@ void cncblasCsscal(size_t n, const float *alpha, cuComplex *x) {
 
   // Launch the kernel
   size_t GRID_SIZE = (n + BLOCK_SIZE - 1) / BLOCK_SIZE;
-  cnblasCsscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
+  cncblasCsscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
 }
 
-__global__ void cnblasZscalKernel(size_t n, const cuDoubleComplex *alpha, cuDoubleComplex *x) {
+__global__ void cncblasZscalKernel(size_t n, const cuDoubleComplex *alpha, cuDoubleComplex *x) {
   size_t i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n) {
     x[i] = cuCmul(x[i], *alpha);
@@ -148,10 +148,10 @@ void cncblasZscal(size_t n, const cuDoubleComplex *alpha, cuDoubleComplex *x) {
 
   // Launch the kernel
   size_t GRID_SIZE = (n + BLOCK_SIZE - 1) / BLOCK_SIZE;
-  cnblasZscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
+  cncblasZscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
 }
 
-__global__ void cnblasZdscalKernel(size_t n, const double *alpha, cuDoubleComplex *x) {
+__global__ void cncblasZdscalKernel(size_t n, const double *alpha, cuDoubleComplex *x) {
   size_t i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n) {
     x[i] = cuCmul(x[i], make_cuDoubleComplex(*alpha, 0.0));
@@ -177,5 +177,5 @@ void cncblasZdscal(size_t n, const double *alpha, cuDoubleComplex *x) {
 
   // Launch the kernel
   size_t GRID_SIZE = (n + BLOCK_SIZE - 1) / BLOCK_SIZE;
-  cnblasZdscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
+  cncblasZdscalKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, alpha, x);
 }

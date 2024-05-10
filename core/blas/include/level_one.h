@@ -11,7 +11,7 @@
 #define CNCBLAS_LEVEL_ONE_CUH
 
 /*
- * Level 1 BLAS
+ * Level 1 BLAS that performs scalar and vector based operations.
  */
 
 #include "cuComplex.h"
