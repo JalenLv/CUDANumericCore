@@ -1,7 +1,5 @@
 #include "../cncblas.h"
 #include "helpers.cuh"
-#include <iostream>
-#include <stdexcept>
 
 /* -------------------- KERNEL DECLARATION -------------------- */
 
@@ -157,7 +155,7 @@ void cncblasCgemv(cncblasOperation_t trans,
   cuComplex one = make_cuComplex(1, 0);
   cuComplex zero = make_cuComplex(0, 0);
   // quick return if possible
-  if (m == 0 || n == 0 || (gemvComplexIsEqual(h_alpha, &zero) && gemvComplexIsEqual(h_beta, &one))) {
+  if (m == 0 || n == 0 || (cncblasComplexIsEqual(h_alpha, &zero) && cncblasComplexIsEqual(h_beta, &one))) {
     return;
   }
 
@@ -173,9 +171,9 @@ void cncblasCgemv(cncblasOperation_t trans,
   }
 
   // First form y = beta * y
-  if (!gemvComplexIsEqual(h_beta, &one))
+  if (!cncblasComplexIsEqual(h_beta, &one))
     cncblasCscal(leny, d_beta, y);
-  if (gemvComplexIsEqual(h_alpha, &zero)) return;
+  if (cncblasComplexIsEqual(h_alpha, &zero)) return;
 
   // Form y = alpha * op(A) * x + y
   if (trans == CNCBLAS_OP_N) {
@@ -215,7 +213,7 @@ void cncblasZgemv(cncblasOperation_t trans,
   cuDoubleComplex one = make_cuDoubleComplex(1, 0);
   cuDoubleComplex zero = make_cuDoubleComplex(0, 0);
   // quick return if possible
-  if (m == 0 || n == 0 || (gemvComplexIsEqual(h_alpha, &zero) && gemvComplexIsEqual(h_beta, &one))) {
+  if (m == 0 || n == 0 || (cncblasComplexIsEqual(h_alpha, &zero) && cncblasComplexIsEqual(h_beta, &one))) {
     return;
   }
 
@@ -231,9 +229,9 @@ void cncblasZgemv(cncblasOperation_t trans,
   }
 
   // First form y = beta * y
-  if (!gemvComplexIsEqual(h_beta, &one))
+  if (!cncblasComplexIsEqual(h_beta, &one))
     cncblasZscal(leny, d_beta, y);
-  if (gemvComplexIsEqual(h_alpha, &zero)) return;
+  if (cncblasComplexIsEqual(h_alpha, &zero)) return;
 
   // Form y = alpha * op(A) * x + y
   if (trans == CNCBLAS_OP_N) {

@@ -81,12 +81,15 @@ gemvScalarPointerPreprocess(const T *&alpha, const T *beta,
   } else if (getMemoryType(beta) == cudaMemoryTypeUnregistered) {
     *h_beta = *beta;
     checkCudaErrors(cudaMemcpy(d_beta, h_beta, sizeof(T), cudaMemcpyHostToDevice));
+  } else if (getMemoryType(beta) == cudaMemoryTypeManaged) {
+    *h_beta = *beta;
+    checkCudaErrors(cudaMemcpy(d_beta, h_beta, sizeof(T), cudaMemcpyHostToDevice));
   }
 }
 
 template<typename T>
 inline static bool
-gemvComplexIsEqual(const T *a, const T *b) {
+cncblasComplexIsEqual(const T *a, const T *b) {
   double epsilon = 1e-6;
   return (std::abs(a->x - b->x) < epsilon)
          && (std::abs(a->y - b->y) < epsilon);
