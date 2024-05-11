@@ -22,9 +22,9 @@ enum cncblasOperation_t {
   CNCBLAS_OP_C = 2
 };
 
-/* |-------------------------------------------------------| */
+/* |------------------------------------------------------| */
 /* |  Note: The vectors x and y must be device pointers.  | */
-/* |-------------------------------------------------------| */
+/* |------------------------------------------------------| */
 
 /** @fn cncblas<T>gbmv
  * @brief This function performs the banded matrix-vector multiplication
@@ -39,7 +39,20 @@ enum cncblasOperation_t {
  * @param kl The number of sub-diagonals of the matrix A.
  * @param ku The number of super-diagonals of the matrix A.
  * @param alpha The scalar \f$ \alpha \f$.
- * @param A
+ * @param A The banded matrix A is stored column by column,
+ *          with the main diagonal stored in row ku + 1 (starting in
+ *          first position), the first superdiagonal stored in row ku
+ *          (starting in second position), the first subdiagonal stored
+ *          in row ku + 2 (starting in first position), etc. So that
+ *          in general, the element A(i,j) is stored in the memory
+ *          location A(ku+1+i-j,j) for j = 1,2,...,n and i
+ *          in max(1,j-ku),...,min(m,j+kl). Also, the elements in the
+ *          array A that do not conceptually correspond to the elements
+ *          in the banded matrix (the top left ku x ku and bottom right
+ *          kl x kl triangles) are not referenced.
+ * @param x The vector x.
+ * @param beta The scalar \f$ \beta \f$.
+ * @param y The vector y.
  **/
 void cncblasSgbmv(cncblasOperation_t trans,
                   int m, int n, int kl, int ku,
@@ -70,6 +83,13 @@ void cncblasZgbmv(cncblasOperation_t trans,
  *                - CNCBLAS_OP_N: \f$ \text{op}(A) = A \f$
  *                - CNCBLAS_OP_T: \f$ \text{op}(A) = A^T \f$
  *                - CNCBLAS_OP_C: \f$ \text{op}(A) = A^H \f$
+ * @param m The number of rows of the matrix A.
+ * @param n The number of columns of the matrix A.
+ * @param alpha The scalar \f$ \alpha \f$.
+ * @param A The matrix A.
+ * @param x The vector x.
+ * @param beta The scalar \f$ \beta \f$.
+ * @param y The vector y.
  **/
 void cncblasSgemv(cncblasOperation_t trans,
                   int m, int n,
