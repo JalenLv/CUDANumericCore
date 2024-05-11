@@ -11,6 +11,7 @@ set(src_files
         src/scal.cu
         src/swap.cu
         src/gemv.cu
+        src/ger.cu
 )
 
 add_library(${PROJECT_NAME} SHARED ${src_files})

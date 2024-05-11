@@ -108,4 +108,35 @@ void cncblasZgemv(cncblasOperation_t trans,
                   const cuDoubleComplex *alpha, const cuDoubleComplex *A, const cuDoubleComplex *x,
                   const cuDoubleComplex *beta, cuDoubleComplex *y);
 
+/** @fn cncblas<T>ger
+ * @brief This function performs the rank-1 update
+ * \f$ A = \alpha \cdot x \cdot y^T + A \f$ if `ger()`, `geru()` is called
+ * \f$ A = \alpha \cdot x \cdot y^H + A \f$ if `gerc()` is called
+ *
+ * @param m The number of rows of the matrix A.
+ * @param n The number of columns of the matrix A.
+ * @param alpha The scalar \f$ \alpha \f$.
+ * @param x The vector x.
+ * @param y The vector y.
+ * @param A The matrix A.
+ */
+void cncblasSger(int m, int n,
+                 const float *alpha, const float *x, const float *y,
+                 float *A);
+void cncblasDger(int m, int n,
+                 const double *alpha, const double *x, const double *y,
+                 double *A);
+void cncblasCgeru(int m, int n,
+                  const cuComplex *alpha, const cuComplex *x, const cuComplex *y,
+                  cuComplex *A);
+void cncblasCgerc(int m, int n,
+                  const cuComplex *alpha, const cuComplex *x, const cuComplex *y,
+                  cuComplex *A);
+void cncblasZgeru(int m, int n,
+                  const cuDoubleComplex *alpha, const cuDoubleComplex *x, const cuDoubleComplex *y,
+                  cuDoubleComplex *A);
+void cncblasZgerc(int m, int n,
+                  const cuDoubleComplex *alpha, const cuDoubleComplex *x, const cuDoubleComplex *y,
+                  cuDoubleComplex *A);
+
 #endif
