@@ -9,4 +9,3 @@
 /cmake-build-release-cuda/
 /cmake-build-debug-cuda/
 /build
-TEST.cu

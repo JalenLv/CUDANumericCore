@@ -11,6 +11,7 @@ set(src_files
         src/scal.cu
         src/swap.cu
         src/gemv.cu
+        src/ger.cu
 )
 
 add_library(${PROJECT_NAME} SHARED ${src_files})
@@ -24,13 +25,13 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 
 # debugging
 add_executable(cncblas_debug
-        ${src_files}
         TEST.cu
 )
 
 target_include_directories(cncblas_debug PRIVATE
         ../../common
 )
+target_link_libraries(cncblas_debug ${PROJECT_NAME})
 
 # Find and link the cuBLAS library
 find_library(CUBLAS_LIBRARIES cublas PATHS ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})

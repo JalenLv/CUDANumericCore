@@ -81,15 +81,58 @@ gemvScalarPointerPreprocess(const T *&alpha, const T *beta,
   } else if (getMemoryType(beta) == cudaMemoryTypeUnregistered) {
     *h_beta = *beta;
     checkCudaErrors(cudaMemcpy(d_beta, h_beta, sizeof(T), cudaMemcpyHostToDevice));
+  } else if (getMemoryType(beta) == cudaMemoryTypeManaged) {
+    *h_beta = *beta;
+    checkCudaErrors(cudaMemcpy(d_beta, h_beta, sizeof(T), cudaMemcpyHostToDevice));
   }
 }
 
 template<typename T>
 inline static bool
-gemvComplexIsEqual(const T *a, const T *b) {
+cncblasComplexIsEqual(const T *a, const T *b) {
   double epsilon = 1e-6;
   return (std::abs(a->x - b->x) < epsilon)
          && (std::abs(a->y - b->y) < epsilon);
+}
+
+/* ------------------------- GER ------------------------- */
+
+template<typename T>
+inline static void
+gerParamErrorCheck(int m, int n,
+                   const T *&alpha, const T *&x, const T *&y, T *&A) {
+  try {
+    if (m < 0 || n < 0) {
+      throw std::invalid_argument("m or n is less than 0");
+    }
+    if (alpha == nullptr || x == nullptr || y == nullptr || A == nullptr) {
+      throw std::invalid_argument("One or more input arrays are nullptr");
+    }
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    exit(1);
+  }
+}
+
+template<typename T>
+inline static void
+gerScalarPointerPreprocess(const T *&alpha,
+                           T *&h_alpha, T *&d_alpha) {
+  h_alpha = (T *) malloc(sizeof(T));
+  checkCudaErrors(cudaMalloc(&d_alpha, sizeof(T)));
+  if (getMemoryType(alpha) == cudaMemoryTypeHost) {
+    *h_alpha = *alpha;
+    checkCudaErrors(cudaMemcpy(d_alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
+  } else if (getMemoryType(alpha) == cudaMemoryTypeDevice) {
+    checkCudaErrors(cudaMemcpy(h_alpha, alpha, sizeof(T), cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(d_alpha, alpha, sizeof(T), cudaMemcpyDeviceToDevice));
+  } else if (getMemoryType(alpha) == cudaMemoryTypeUnregistered) {
+    *h_alpha = *alpha;
+    checkCudaErrors(cudaMemcpy(d_alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
+  } else if (getMemoryType(alpha) == cudaMemoryTypeManaged) {
+    *h_alpha = *alpha;
+    checkCudaErrors(cudaMemcpy(d_alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
+  }
 }
 
 #endif // CNCBLAS_HELPERS_CUH
