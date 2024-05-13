@@ -1,5 +1,5 @@
-#ifndef CNC_COMMON_H
-#define CNC_COMMON_H
+#ifndef CNCBLAS_COMMON_H
+#define CNCBLAS_COMMON_H
 
 /* Prevent inclusion of internal headers from public headers. */
 #ifndef CNCBLAS_INCLUDE_COMPILER_INTERNAL_HEADERS
@@ -56,4 +56,4 @@ __host__ static inline cudaMemoryType getMemoryType(const void *ptr) {
   return attributes.type;
 }
 
-#endif //CNC_COMMON_H
+#endif //CNCBLAS_COMMON_H
