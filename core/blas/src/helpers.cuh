@@ -19,6 +19,11 @@ __device__ static __inline__ double cncblasZmag(const cuDoubleComplex *x) {
   return mag;
 }
 
+__device__ static __inline__ double infty() {
+  const unsigned long long ieee754_inf = 0x7ff0000000000000ULL;
+  return __longlong_as_double(ieee754_inf);
+}
+
 /* ------------------------- DOT ------------------------- */
 
 __device__ static __inline__ void cncblasCVaddf(volatile cuComplex *a, volatile cuComplex *b) {

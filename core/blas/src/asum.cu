@@ -98,7 +98,7 @@ __global__ void cncblasDasumKernel(size_t n, const double *x, double *result) {
   sdata[tid] = 0;
   size_t i = idx;
   while (i < n) {
-    sdata[tid] += fabsf(x[i]);
+    sdata[tid] += fabs(x[i]);
     i += blockDim.x * gridDim.x;
   }
   __syncthreads();
