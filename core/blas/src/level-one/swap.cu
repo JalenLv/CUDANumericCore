@@ -1,4 +1,4 @@
-#include "../cncblas.h"
+#include "cncblas.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -21,13 +21,10 @@ void cncblasSwap(size_t n, T *x, T *y) {
   // Check for invalid inputs
   try {
     if (n <= 0) {
-      throw std::invalid_argument("cncblasSwap: invalid n");
+      throw std::invalid_argument("n must be greater than 0");
     }
-    if (x == nullptr) {
-      throw std::invalid_argument("cncblasSwap: x is null");
-    }
-    if (y == nullptr) {
-      throw std::invalid_argument("cncblasSwap: y is null");
+    if (x == nullptr || y == nullptr) {
+      throw std::invalid_argument("x and y must not be null");
     }
   } catch (const std::invalid_argument &e) {
     std::cerr << e.what() << std::endl;

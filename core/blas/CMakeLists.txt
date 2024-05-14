@@ -1,24 +1,21 @@
 # Build the blas library
 project(cncblas)
 set(src_files
-        src/amaxmin.cu
-        src/asum.cu
-        src/axpy.cu
-        src/copy.cu
-        src/dot.cu
-        src/norm2.cu
-        src/rot.cu
-        src/scal.cu
-        src/swap.cu
-        src/gemv.cu
-        src/ger.cu
+        src/level-one/amaxmin.cu
+        src/level-one/asum.cu
+        src/level-one/axpy.cu
+        src/level-one/copy.cu
+        src/level-one/dot.cu
+        src/level-one/norm2.cu
+        src/level-one/rot.cu
+        src/level-one/scal.cu
+        src/level-one/swap.cu
+        src/level-two/gemv.cu
+        src/level-two/ger.cu
 )
 add_library(${PROJECT_NAME} SHARED ${src_files})
 # Ensure the outside world cannot see the internal headers
-target_include_directories(${PROJECT_NAME} PRIVATE
-        include
-        ../../common
-)
+target_include_directories(${PROJECT_NAME} PRIVATE include)
 # Let the outside world see the public headers
 target_include_directories(${PROJECT_NAME} PUBLIC ./)
 set_target_properties(${PROJECT_NAME} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)

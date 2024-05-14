@@ -1,35 +1,35 @@
 #include <gtest/gtest.h>
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
-#include <cncblas.h>
+#include "cncblas.h"
 
-const int N = 1 << 10;
+const int N = 1 << 12;
 
-TEST(amin, singlePrecision) {
+TEST(nrm2, singlePrecision) {
   float *h_x, *d_x;
-  size_t *result_cnc, *result_cublas;
+  float *result_cnc, *result_cublas;
 
   h_x = new float[N];
-  result_cublas = new size_t(0);
-  result_cnc = new size_t(1);
+  result_cublas = new float(0.0f);
+  result_cnc = new float(1.0f);
   checkCudaErrors(cudaMalloc(&d_x, N * sizeof(float)));
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = rand() / (float) RAND_MAX;
+    h_x[i] = cncblasRandf;
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(float), cudaMemcpyHostToDevice));
 
-  // Compute amin on GPU using cublas
+  // Compute nrm2 on GPU using cublas
   cublasHandle_t handle;
   cublasCreate(&handle);
-  cublasIsamin(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
+  cublasSnrm2(handle, N, d_x, 1, result_cublas);
 
-  // Compute amin on GPU using cncblas
-  *result_cnc = cncblasSamin(N, d_x);
+  // Compute nrm2 on GPU using cncblas
+  *result_cnc = cncblasSnrm2(N, d_x);
 
   // Compare the results
-  EXPECT_EQ(*result_cublas - 1, *result_cnc);
+  EXPECT_FLOAT_EQ(*result_cublas, *result_cnc);
 
   // Free memory
   delete[] h_x;
@@ -38,31 +38,31 @@ TEST(amin, singlePrecision) {
   checkCudaErrors(cudaFree(d_x));
 }
 
-TEST(amin, doublePrecision) {
+TEST(nrm2, doublePrecision) {
   double *h_x, *d_x;
-  size_t *result_cnc, *result_cublas;
+  double *result_cnc, *result_cublas;
 
   h_x = new double[N];
-  result_cublas = new size_t(0);
-  result_cnc = new size_t(1);
+  result_cublas = new double(0.0);
+  result_cnc = new double(1.0);
   checkCudaErrors(cudaMalloc(&d_x, N * sizeof(double)));
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = rand() / (double) RAND_MAX;
+    h_x[i] = cncblasRand;
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(double), cudaMemcpyHostToDevice));
 
-  // Compute amin on GPU using cublas
+  // Compute nrm2 on GPU using cublas
   cublasHandle_t handle;
   cublasCreate(&handle);
-  cublasIdamin(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
+  cublasDnrm2(handle, N, d_x, 1, result_cublas);
 
-  // Compute amin on GPU using cncblas
-  *result_cnc = cncblasDamin(N, d_x);
+  // Compute nrm2 on GPU using cncblas
+  *result_cnc = cncblasDnrm2(N, d_x);
 
   // Compare the results
-  EXPECT_EQ(*result_cublas - 1, *result_cnc) << INFINITY;
+  EXPECT_DOUBLE_EQ(*result_cublas, *result_cnc);
 
   // Free memory
   delete[] h_x;
@@ -71,31 +71,31 @@ TEST(amin, doublePrecision) {
   checkCudaErrors(cudaFree(d_x));
 }
 
-TEST(amin, complexSinglePrecision) {
+TEST(nrm2, complexSinglePrecision) {
   cuComplex *h_x, *d_x;
-  size_t *result_cnc, *result_cublas;
+  float *result_cnc, *result_cublas;
 
   h_x = new cuComplex[N];
-  result_cublas = new size_t(0);
-  result_cnc = new size_t(1);
+  result_cublas = new float(0.0f);
+  result_cnc = new float(1.0f);
   checkCudaErrors(cudaMalloc(&d_x, N * sizeof(cuComplex)));
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = make_cuComplex(rand() / (float) RAND_MAX, rand() / (float) RAND_MAX);
+    h_x[i] = make_cuComplex(cncblasRandf, cncblasRandf);
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(cuComplex), cudaMemcpyHostToDevice));
 
-  // Compute amin on GPU using cublas
+  // Compute nrm2 on GPU using cublas
   cublasHandle_t handle;
   cublasCreate(&handle);
-  cublasIcamin(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
+  cublasScnrm2(handle, N, d_x, 1, result_cublas);
 
-  // Compute amin on GPU using cncblas
-  *result_cnc = cncblasCamin(N, d_x);
+  // Compute nrm2 on GPU using cncblas
+  *result_cnc = cncblasCnrm2(N, d_x);
 
   // Compare the results
-  EXPECT_EQ(*result_cublas - 1, *result_cnc);
+  EXPECT_FLOAT_EQ(*result_cublas, *result_cnc);
 
   // Free memory
   delete[] h_x;
@@ -104,31 +104,31 @@ TEST(amin, complexSinglePrecision) {
   checkCudaErrors(cudaFree(d_x));
 }
 
-TEST(amin, complexDoublePrecision) {
+TEST(nrm2, complexDoublePrecision) {
   cuDoubleComplex *h_x, *d_x;
-  size_t *result_cnc, *result_cublas;
+  double *result_cnc, *result_cublas;
 
   h_x = new cuDoubleComplex[N];
-  result_cublas = new size_t(0);
-  result_cnc = new size_t(1);
+  result_cublas = new double(0.0);
+  result_cnc = new double(1.0);
   checkCudaErrors(cudaMalloc(&d_x, N * sizeof(cuDoubleComplex)));
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = make_cuDoubleComplex(rand() / (double) RAND_MAX, rand() / (double) RAND_MAX);
+    h_x[i] = make_cuDoubleComplex(cncblasRand, cncblasRand);
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(cuDoubleComplex), cudaMemcpyHostToDevice));
 
-  // Compute amin on GPU using cublas
+  // Compute nrm2 on GPU using cublas
   cublasHandle_t handle;
   cublasCreate(&handle);
-  cublasIzamin(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
+  cublasDznrm2(handle, N, d_x, 1, result_cublas);
 
-  // Compute amin on GPU using cncblas
-  *result_cnc = cncblasZamin(N, d_x);
+  // Compute nrm2 on GPU using cncblas
+  *result_cnc = cncblasZnrm2(N, d_x);
 
   // Compare the results
-  EXPECT_EQ(*result_cublas - 1, *result_cnc);
+  EXPECT_DOUBLE_EQ(*result_cublas, *result_cnc);
 
   // Free memory
   delete[] h_x;

@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
-#include <cncblas.h>
+#include "cncblas.h"
 
-const int N = 1 << 10;
+const int N = 1 << 12;
 
-TEST(amax, singlePrecision) {
+TEST(amin, singlePrecision) {
   float *h_x, *d_x;
   size_t *result_cnc, *result_cublas;
 
@@ -16,17 +16,17 @@ TEST(amax, singlePrecision) {
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = rand() / (float) RAND_MAX;
+    h_x[i] = cncblasRandf;
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(float), cudaMemcpyHostToDevice));
 
-  // Compute amax on GPU using cublas
+  // Compute amin on GPU using cublas
   cublasHandle_t handle;
   cublasCreate(&handle);
-  cublasIsamax(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
+  cublasIsamin(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
 
-  // Compute amax on GPU using cncblas
-  *result_cnc = cncblasSamax(N, d_x);
+  // Compute amin on GPU using cncblas
+  *result_cnc = cncblasSamin(N, d_x);
 
   // Compare the results
   EXPECT_EQ(*result_cublas - 1, *result_cnc);
@@ -38,7 +38,7 @@ TEST(amax, singlePrecision) {
   checkCudaErrors(cudaFree(d_x));
 }
 
-TEST(amax, doublePrecision) {
+TEST(amin, doublePrecision) {
   double *h_x, *d_x;
   size_t *result_cnc, *result_cublas;
 
@@ -49,20 +49,20 @@ TEST(amax, doublePrecision) {
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = rand() / (double) RAND_MAX;
+    h_x[i] = cncblasRand;
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(double), cudaMemcpyHostToDevice));
 
-  // Compute amax on GPU using cublas
+  // Compute amin on GPU using cublas
   cublasHandle_t handle;
   cublasCreate(&handle);
-  cublasIdamax(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
+  cublasIdamin(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
 
-  // Compute amax on GPU using cncblas
-  *result_cnc = cncblasDamax(N, d_x);
+  // Compute amin on GPU using cncblas
+  *result_cnc = cncblasDamin(N, d_x);
 
   // Compare the results
-  EXPECT_EQ(*result_cublas - 1, *result_cnc);
+  EXPECT_EQ(*result_cublas - 1, *result_cnc) << INFINITY;
 
   // Free memory
   delete[] h_x;
@@ -71,7 +71,7 @@ TEST(amax, doublePrecision) {
   checkCudaErrors(cudaFree(d_x));
 }
 
-TEST(amax, complexSinglePrecision) {
+TEST(amin, complexSinglePrecision) {
   cuComplex *h_x, *d_x;
   size_t *result_cnc, *result_cublas;
 
@@ -82,17 +82,17 @@ TEST(amax, complexSinglePrecision) {
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = make_cuComplex(rand() / (float) RAND_MAX, rand() / (float) RAND_MAX);
+    h_x[i] = make_cuComplex(cncblasRandf, cncblasRandf);
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(cuComplex), cudaMemcpyHostToDevice));
 
-  // Compute amax on GPU using cublas
+  // Compute amin on GPU using cublas
   cublasHandle_t handle;
   cublasCreate(&handle);
-  cublasIcamax(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
+  cublasIcamin(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
 
-  // Compute amax on GPU using cncblas
-  *result_cnc = cncblasCamax(N, d_x);
+  // Compute amin on GPU using cncblas
+  *result_cnc = cncblasCamin(N, d_x);
 
   // Compare the results
   EXPECT_EQ(*result_cublas - 1, *result_cnc);
@@ -104,7 +104,7 @@ TEST(amax, complexSinglePrecision) {
   checkCudaErrors(cudaFree(d_x));
 }
 
-TEST(amax, complexDoublePrecision) {
+TEST(amin, complexDoublePrecision) {
   cuDoubleComplex *h_x, *d_x;
   size_t *result_cnc, *result_cublas;
 
@@ -115,17 +115,17 @@ TEST(amax, complexDoublePrecision) {
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = make_cuDoubleComplex(rand() / (double) RAND_MAX, rand() / (double) RAND_MAX);
+    h_x[i] = make_cuDoubleComplex(cncblasRand, cncblasRand);
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(cuDoubleComplex), cudaMemcpyHostToDevice));
 
-  // Compute amax on GPU using cublas
+  // Compute amin on GPU using cublas
   cublasHandle_t handle;
   cublasCreate(&handle);
-  cublasIzamax(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
+  cublasIzamin(handle, N, d_x, 1, reinterpret_cast<int *>(result_cublas));
 
-  // Compute amax on GPU using cncblas
-  *result_cnc = cncblasZamax(N, d_x);
+  // Compute amin on GPU using cncblas
+  *result_cnc = cncblasZamin(N, d_x);
 
   // Compare the results
   EXPECT_EQ(*result_cublas - 1, *result_cnc);

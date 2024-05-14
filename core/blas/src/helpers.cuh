@@ -1,45 +1,157 @@
 #ifndef CNCBLAS_HELPERS_CUH
 #define CNCBLAS_HELPERS_CUH
 
+#include <cuComplex.h>
+#include <iostream>
+#include <stdexcept>
+
 /* ------------------------- AMAX/AMIN ------------------------- */
 
-#include "cuComplex.h"
 
-__device__ static __inline__ float cncblasCmag(const cuComplex *x) {
+__device__ static __inline__
+float cncblasCmag(const cuComplex *x) {
   float a = x->x;
   float b = x->y;
   float mag = fabsf(a) + fabsf(b);
   return mag;
 }
 
-__device__ static __inline__ double cncblasZmag(const cuDoubleComplex *x) {
+__device__ static __inline__
+double cncblasZmag(const cuDoubleComplex *x) {
   double a = x->x;
   double b = x->y;
   double mag = fabs(a) + fabs(b);
   return mag;
 }
 
-__device__ static __inline__ double infty() {
+__device__ static __inline__
+double infty() {
   const unsigned long long ieee754_inf = 0x7ff0000000000000ULL;
   return __longlong_as_double(ieee754_inf);
 }
 
 /* ------------------------- DOT ------------------------- */
 
-__device__ static __inline__ void cncblasCVaddf(volatile cuComplex *a, volatile cuComplex *b) {
+__device__ static __inline__
+void cncblasCVaddf(volatile cuComplex *a, volatile cuComplex *b) {
   a->x += b->x;
   a->y += b->y;
 }
 
-__device__ static __inline__ void cncblasZVadd(volatile cuDoubleComplex *a, volatile cuDoubleComplex *b) {
+__device__ static __inline__
+void cncblasZVadd(volatile cuDoubleComplex *a, volatile cuDoubleComplex *b) {
   a->x += b->x;
   a->y += b->y;
+}
+
+/* ------------------------- ROT ------------------------- */
+
+template<typename T>
+inline static void
+rotParamErrorCheck(size_t n, T *x, T *y, const T *c, const T *s) {
+  try {
+    if (n <= 0) {
+      throw std::invalid_argument("n must be greater than 0");
+    }
+    if (x == nullptr || y == nullptr || c == nullptr || s == nullptr) {
+      throw std::invalid_argument("x, y, c, and s must not be null");
+    }
+    const T epsilon = 1e-5;
+    if (std::abs((*c) * (*c) + (*s) * (*s) - 1) > epsilon) {
+      throw std::invalid_argument("c^2 + s^2 must be equal to 1");
+    }
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    exit(1);
+  }
+}
+
+/* -------------------- ROTG --------------------- */
+
+#ifndef sgnf
+#define sgnf(x) ((x) > 0.0f ? 1.0f : ((x) < 0.0f ? -1.0f : 0.0f))
+#endif // sgnf(x)
+
+#ifndef sgn
+#define sgn(x) ((x) > 0.0 ? 1.0 : ((x) < 0.0 ? -1.0 : 0.0))
+#endif // sgn(x)
+
+template<typename T>
+inline static void
+rotgParamErrorCheck(T *a, T *b, T *c, T *s) {
+  try {
+    if (a == nullptr || b == nullptr || c == nullptr || s == nullptr) {
+      throw std::invalid_argument("a, b, c, and s must not be null");
+    }
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    exit(1);
+  }
+}
+
+template<typename T>
+inline static void
+rotgScalarPointerPostprocess(T *alpha, T *h_alpha) {
+  if (cncblasGetMemoryType(alpha) == cudaMemoryTypeHost) {
+    *alpha = *h_alpha;
+  } else if (cncblasGetMemoryType(alpha) == cudaMemoryTypeDevice) {
+    checkCudaErrors(cudaMemcpy(alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
+  } else if (cncblasGetMemoryType(alpha) == cudaMemoryTypeUnregistered) {
+    *alpha = *h_alpha;
+  } else if (cncblasGetMemoryType(alpha) == cudaMemoryTypeManaged) {
+    *alpha = *h_alpha;
+  }
+}
+
+/* ------------------------- SCAL ------------------------- */
+
+template<typename T>
+inline static void
+scalParamErrorCheck(size_t n, const T *alpha, T *x) {
+  try {
+    if (n <= 0) {
+      throw std::invalid_argument("n must be greater than 0");
+    }
+    if (alpha == nullptr || x == nullptr) {
+      throw std::invalid_argument("alpha and x must not be null");
+    }
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    exit(1);
+  }
+}
+
+inline static void
+scalParamErrorCheck(size_t n, const float *alpha, cuComplex *x) {
+  try {
+    if (n <= 0) {
+      throw std::invalid_argument("n must be greater than 0");
+    }
+    if (alpha == nullptr || x == nullptr) {
+      throw std::invalid_argument("alpha and x must not be null");
+    }
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    exit(1);
+  }
+}
+
+inline static void
+scalParamErrorCheck(size_t n, const double *alpha, cuDoubleComplex *x) {
+  try {
+    if (n <= 0) {
+      throw std::invalid_argument("n must be greater than 0");
+    }
+    if (alpha == nullptr || x == nullptr) {
+      throw std::invalid_argument("alpha and x must not be null");
+    }
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    exit(1);
+  }
 }
 
 /* ------------------------- GEMV ------------------------- */
-
-#include <iostream>
-#include <stdexcept>
 
 template<typename T>
 inline static void
@@ -59,47 +171,6 @@ gemvParamErrorCheck(int m, int n,
   }
 }
 
-template<typename T>
-inline static void
-gemvScalarPointerPreprocess(const T *&alpha, const T *beta,
-                            T *&h_alpha, T *&h_beta, T *&d_alpha, T *&d_beta) {
-  h_alpha = (T *) malloc(sizeof(T));
-  h_beta = (T *) malloc(sizeof(T));
-  checkCudaErrors(cudaMalloc(&d_alpha, sizeof(T)));
-  checkCudaErrors(cudaMalloc(&d_beta, sizeof(T)));
-  if (getMemoryType(alpha) == cudaMemoryTypeHost) {
-    *h_alpha = *alpha;
-    checkCudaErrors(cudaMemcpy(d_alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
-  } else if (getMemoryType(alpha) == cudaMemoryTypeDevice) {
-    checkCudaErrors(cudaMemcpy(h_alpha, alpha, sizeof(T), cudaMemcpyDeviceToHost));
-    checkCudaErrors(cudaMemcpy(d_alpha, alpha, sizeof(T), cudaMemcpyDeviceToDevice));
-  } else if (getMemoryType(alpha) == cudaMemoryTypeUnregistered) {
-    *h_alpha = *alpha;
-    checkCudaErrors(cudaMemcpy(d_alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
-  }
-  if (getMemoryType(beta) == cudaMemoryTypeHost) {
-    *h_beta = *beta;
-    checkCudaErrors(cudaMemcpy(d_beta, h_beta, sizeof(T), cudaMemcpyHostToDevice));
-  } else if (getMemoryType(beta) == cudaMemoryTypeDevice) {
-    checkCudaErrors(cudaMemcpy(h_beta, beta, sizeof(T), cudaMemcpyDeviceToHost));
-    checkCudaErrors(cudaMemcpy(d_beta, beta, sizeof(T), cudaMemcpyDeviceToDevice));
-  } else if (getMemoryType(beta) == cudaMemoryTypeUnregistered) {
-    *h_beta = *beta;
-    checkCudaErrors(cudaMemcpy(d_beta, h_beta, sizeof(T), cudaMemcpyHostToDevice));
-  } else if (getMemoryType(beta) == cudaMemoryTypeManaged) {
-    *h_beta = *beta;
-    checkCudaErrors(cudaMemcpy(d_beta, h_beta, sizeof(T), cudaMemcpyHostToDevice));
-  }
-}
-
-template<typename T>
-inline static bool
-cncblasComplexIsEqual(const T *a, const T *b) {
-  double epsilon = 1e-6;
-  return (std::abs(a->x - b->x) < epsilon)
-         && (std::abs(a->y - b->y) < epsilon);
-}
-
 /* ------------------------- GER ------------------------- */
 
 template<typename T>
@@ -116,27 +187,6 @@ gerParamErrorCheck(int m, int n,
   } catch (const std::invalid_argument &e) {
     std::cerr << "Invalid argument: " << e.what() << std::endl;
     exit(1);
-  }
-}
-
-template<typename T>
-inline static void
-gerScalarPointerPreprocess(const T *&alpha,
-                           T *&h_alpha, T *&d_alpha) {
-  h_alpha = (T *) malloc(sizeof(T));
-  checkCudaErrors(cudaMalloc(&d_alpha, sizeof(T)));
-  if (getMemoryType(alpha) == cudaMemoryTypeHost) {
-    *h_alpha = *alpha;
-    checkCudaErrors(cudaMemcpy(d_alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
-  } else if (getMemoryType(alpha) == cudaMemoryTypeDevice) {
-    checkCudaErrors(cudaMemcpy(h_alpha, alpha, sizeof(T), cudaMemcpyDeviceToHost));
-    checkCudaErrors(cudaMemcpy(d_alpha, alpha, sizeof(T), cudaMemcpyDeviceToDevice));
-  } else if (getMemoryType(alpha) == cudaMemoryTypeUnregistered) {
-    *h_alpha = *alpha;
-    checkCudaErrors(cudaMemcpy(d_alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
-  } else if (getMemoryType(alpha) == cudaMemoryTypeManaged) {
-    *h_alpha = *alpha;
-    checkCudaErrors(cudaMemcpy(d_alpha, h_alpha, sizeof(T), cudaMemcpyHostToDevice));
   }
 }
 

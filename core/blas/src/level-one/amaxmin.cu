@@ -1,5 +1,5 @@
-#include "../cncblas.h"
-#include "helpers.cuh"
+#include "cncblas.h"
+#include "src/helpers.cuh"
 #include <stdexcept>
 #include <iostream>
 

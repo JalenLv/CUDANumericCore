@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
-#include <cncblas.h>
+#include "cncblas.h"
 
-const int N = 1 << 10;
+const int N = 1 << 12;
 
 TEST(asum, singlePrecision) {
   float *h_x, *d_x;
@@ -16,7 +16,7 @@ TEST(asum, singlePrecision) {
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = rand() / (float) RAND_MAX;
+    h_x[i] = cncblasRandf;
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(float), cudaMemcpyHostToDevice));
 
@@ -49,7 +49,7 @@ TEST(asum, doublePrecision) {
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = rand() / (double) RAND_MAX;
+    h_x[i] = cncblasRand;
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(double), cudaMemcpyHostToDevice));
 
@@ -82,7 +82,7 @@ TEST(asum, complexSinglePrecision) {
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = make_cuComplex(rand() / (float) RAND_MAX, rand() / (float) RAND_MAX);
+    h_x[i] = make_cuComplex(cncblasRandf, cncblasRandf);
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(cuComplex), cudaMemcpyHostToDevice));
 
@@ -115,7 +115,7 @@ TEST(asum, complexDoublePrecision) {
 
   srand(time(NULL));
   for (int i = 0; i < N; i++) {
-    h_x[i] = make_cuDoubleComplex(rand() / (double) RAND_MAX, rand() / (double) RAND_MAX);
+    h_x[i] = make_cuDoubleComplex(cncblasRand, cncblasRand);
   }
   checkCudaErrors(cudaMemcpy(d_x, h_x, N * sizeof(cuDoubleComplex), cudaMemcpyHostToDevice));
 
