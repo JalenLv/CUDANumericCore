@@ -1,5 +1,5 @@
-#include "../cncblas.h"
-#include "helpers.cuh"
+#include "cncblas.h"
+#include "src/helpers.cuh"
 
 /* -------------------- KERNEL DECLARATION -------------------- */
 
@@ -46,7 +46,8 @@ void cncblasSgemv(cncblasOperation_t trans,
   gemvParamErrorCheck(m, n, alpha, A, x, beta, y);
   // Preprocess scalar pointers
   float *h_alpha, *h_beta, *d_alpha, *d_beta;
-  gemvScalarPointerPreprocess(alpha, beta, h_alpha, h_beta, d_alpha, d_beta);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(beta, h_beta, d_beta);
 
   // quick return if possible
   if (m == 0 || n == 0 || (*h_alpha == 0 && *h_beta == 1)) {
@@ -98,7 +99,8 @@ void cncblasDgemv(cncblasOperation_t trans,
   gemvParamErrorCheck(m, n, alpha, A, x, beta, y);
   // Preprocess scalar pointers
   double *h_alpha, *h_beta, *d_alpha, *d_beta;
-  gemvScalarPointerPreprocess(alpha, beta, h_alpha, h_beta, d_alpha, d_beta);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(beta, h_beta, d_beta);
 
   // quick return if possible
   if (m == 0 || n == 0 || (*h_alpha == 0 && *h_beta == 1)) {
@@ -150,7 +152,8 @@ void cncblasCgemv(cncblasOperation_t trans,
   gemvParamErrorCheck(m, n, alpha, A, x, beta, y);
   // Preprocess scalar pointers
   cuComplex *h_alpha, *h_beta, *d_alpha, *d_beta;
-  gemvScalarPointerPreprocess(alpha, beta, h_alpha, h_beta, d_alpha, d_beta);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(beta, h_beta, d_beta);
 
   cuComplex one = make_cuComplex(1, 0);
   cuComplex zero = make_cuComplex(0, 0);
@@ -208,7 +211,8 @@ void cncblasZgemv(cncblasOperation_t trans,
   gemvParamErrorCheck(m, n, alpha, A, x, beta, y);
   // Preprocess scalar pointers
   cuDoubleComplex *h_alpha, *h_beta, *d_alpha, *d_beta;
-  gemvScalarPointerPreprocess(alpha, beta, h_alpha, h_beta, d_alpha, d_beta);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(beta, h_beta, d_beta);
 
   cuDoubleComplex one = make_cuDoubleComplex(1, 0);
   cuDoubleComplex zero = make_cuDoubleComplex(0, 0);

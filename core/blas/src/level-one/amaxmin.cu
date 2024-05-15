@@ -1,5 +1,5 @@
-#include "../cncblas.h"
-#include "helpers.cuh"
+#include "cncblas.h"
+#include "src/helpers.cuh"
 #include <stdexcept>
 #include <iostream>
 
@@ -457,7 +457,7 @@ __global__ void cncblasDaminKernel(size_t n, const double *x, double *result_dat
   // Shared memory for the block
   __shared__ double sdata[BLOCK_SIZE];
   __shared__ size_t sindex[BLOCK_SIZE];
-  sdata[tid] = INFINITY;
+  sdata[tid] = infty();
   sindex[tid] = 0;
   size_t i = idx;
   while (i < n) {
@@ -513,7 +513,7 @@ size_t cncblasDamin(size_t n, const double *x) {
   // Launch the kernel
   cncblasDaminKernel<<<GRID_SIZE, BLOCK_SIZE>>>
           (n, x, d_data_phase1, d_index_phase1);
-  cncblasDamaxKernel<<<1, GRID_SIZE>>>
+  cncblasDaminKernel<<<1, GRID_SIZE>>>
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
@@ -631,7 +631,7 @@ __global__ void cncblasZaminKernel(size_t n, const cuDoubleComplex *x, double *r
   // Shared memory for the block
   __shared__ double sdata[BLOCK_SIZE];
   __shared__ size_t sindex[BLOCK_SIZE];
-  sdata[tid] = INFINITY;
+  sdata[tid] = infty();
   sindex[tid] = 0;
   size_t i = idx;
   while (i < n) {
@@ -687,7 +687,7 @@ size_t cncblasZamin(size_t n, const cuDoubleComplex *x) {
   // Launch the kernel
   cncblasZaminKernel<<<GRID_SIZE, BLOCK_SIZE>>>
           (n, x, d_data_phase1, d_index_phase1);
-  cncblasDamaxKernel<<<1, GRID_SIZE>>>
+  cncblasDaminKernel<<<1, GRID_SIZE>>>
           (GRID_SIZE, d_data_phase1, d_data_phase2, d_index_phase2);
 
   // Copy the result back to the host
