@@ -1,5 +1,5 @@
-#include "../cncblas.h"
-#include "helpers.cuh"
+#include "cncblas.h"
+#include "src/helpers.cuh"
 
 /* -------------------- KERNEL DECLARATION -------------------- */
 
@@ -31,7 +31,7 @@ void cncblasSger(int m, int n,
   gerParamErrorCheck(m, n, alpha, x, y, A);
   // allocate memory for scalar pointers
   float *h_alpha, *d_alpha;
-  gerScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
 
   // quick return if possible
   if (m == 0 || n == 0 || *h_alpha == 0) {
@@ -52,7 +52,7 @@ void cncblasDger(int m, int n,
   gerParamErrorCheck(m, n, alpha, x, y, A);
   // allocate memory for scalar pointers
   double *h_alpha, *d_alpha;
-  gerScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
 
   // quick return if possible
   if (m == 0 || n == 0 || *h_alpha == 0) {
@@ -73,7 +73,7 @@ void cncblasCgeru(int m, int n,
   gerParamErrorCheck(m, n, alpha, x, y, A);
   // allocate memory for scalar pointers
   cuComplex *h_alpha, *d_alpha;
-  gerScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
 
   // quick return if possible
   cuComplex zero = make_cuComplex(0, 0);
@@ -95,7 +95,7 @@ void cncblasCgerc(int m, int n,
   gerParamErrorCheck(m, n, alpha, x, y, A);
   // allocate memory for scalar pointers
   cuComplex *h_alpha, *d_alpha;
-  gerScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
 
   // quick return if possible
   cuComplex zero = make_cuComplex(0, 0);
@@ -107,7 +107,7 @@ void cncblasCgerc(int m, int n,
   dim3 BLOCK_SIZE(32, 16);
   dim3 GRID_SIZE((n + BLOCK_SIZE.x - 1) / BLOCK_SIZE.x,
                  (m + BLOCK_SIZE.y - 1) / BLOCK_SIZE.y);
-  cncblasCgeruKernel<<<GRID_SIZE, BLOCK_SIZE>>>(m, n, d_alpha, x, y, A);
+  cncblasCgercKernel<<<GRID_SIZE, BLOCK_SIZE>>>(m, n, d_alpha, x, y, A);
 }
 
 void cncblasZgeru(int m, int n,
@@ -117,7 +117,7 @@ void cncblasZgeru(int m, int n,
   gerParamErrorCheck(m, n, alpha, x, y, A);
   // allocate memory for scalar pointers
   cuDoubleComplex *h_alpha, *d_alpha;
-  gerScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
 
   // quick return if possible
   cuDoubleComplex zero = make_cuDoubleComplex(0, 0);
@@ -139,7 +139,7 @@ void cncblasZgerc(int m, int n,
   gerParamErrorCheck(m, n, alpha, x, y, A);
   // allocate memory for scalar pointers
   cuDoubleComplex *h_alpha, *d_alpha;
-  gerScalarPointerPreprocess(alpha, h_alpha, d_alpha);
+  cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
 
   // quick return if possible
   cuDoubleComplex zero = make_cuDoubleComplex(0, 0);
