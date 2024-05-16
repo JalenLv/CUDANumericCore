@@ -8,6 +8,9 @@ endif ()
 set(CMAKE_CUDA_ARCHITECTURES 80 89)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
+if (CMAKE_BUILD_TYPE STREQUAL "")
+  set(CMAKE_BUILD_TYPE "Release")
+endif ()
 
 # Build the core libraries
 add_subdirectory(core)
