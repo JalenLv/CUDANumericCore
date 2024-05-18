@@ -151,6 +151,26 @@ scalParamErrorCheck(size_t n, const double *alpha, cuDoubleComplex *x) {
   }
 }
 
+/* ------------------------- GBMV ------------------------- */
+
+template<typename T>
+inline static void
+gbmvParamErrorCheck(int m, int n, int kl, int ku,
+                    const T *&alpha, const T *&A, const T *&x,
+                    const T *&beta, T *&y) {
+  try {
+    if (m < 0 || n < 0 || kl < 0 || ku < 0) {
+      throw std::invalid_argument("m, n, kl, or ku is less than 0");
+    }
+    if (alpha == nullptr || beta == nullptr || A == nullptr || x == nullptr || y == nullptr) {
+      throw std::invalid_argument("One or more input arrays are nullptr");
+    }
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    exit(1);
+  }
+}
+
 /* ------------------------- GEMV ------------------------- */
 
 template<typename T>

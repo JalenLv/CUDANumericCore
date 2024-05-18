@@ -11,6 +11,7 @@ set(TEST_SRC
         level-one/rotTest.cu
         level-one/scalTest.cu
         level-one/swapTest.cu
+        level-two/gbmvTest.cu
         level-two/gemvTest.cu
         level-two/gerTest.cu
 )

@@ -1,17 +1,19 @@
 # Build the blas library
 project(cncblas)
 set(src_files
-    src/level-one/amaxmin.cu
-    src/level-one/asum.cu
-    src/level-one/axpy.cu
-    src/level-one/copy.cu
-    src/level-one/dot.cu
-    src/level-one/norm2.cu
-    src/level-one/rot.cu
-    src/level-one/scal.cu
-    src/level-one/swap.cu
-    src/level-two/gemv.cu
-    src/level-two/ger.cu)
+        src/level-one/amaxmin.cu
+        src/level-one/asum.cu
+        src/level-one/axpy.cu
+        src/level-one/copy.cu
+        src/level-one/dot.cu
+        src/level-one/norm2.cu
+        src/level-one/rot.cu
+        src/level-one/scal.cu
+        src/level-one/swap.cu
+        src/level-two/gbmv.cu
+        src/level-two/gemv.cu
+        src/level-two/ger.cu
+)
 add_library(${PROJECT_NAME} SHARED ${src_files})
 # Ensure the outside world cannot see the internal headers
 target_include_directories(${PROJECT_NAME} PRIVATE include)

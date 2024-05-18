@@ -104,4 +104,23 @@ cncblasComplexIsEqual(const T *a, const T *b) {
 #define cncblasRand (rand() / (double) RAND_MAX - 0.5)
 #endif //cncblasRand
 
+#ifndef cncblasRandC
+#define cncblasRandC (make_cuComplex(cncblasRandf, cncblasRandf))
+#endif //cncblasRandC
+
+#ifndef cncblasRandZ
+#define cncblasRandZ (make_cuDoubleComplex(cncblasRand, cncblasRand))
+#endif //cncblasRandZ
+
+/**
+ * Min and max functions
+ */
+#ifndef cncblasMin
+#define cncblasMin(a, b) ((a) < (b) ? (a) : (b))
+#endif //cncblasMin
+
+#ifndef cncblasMax
+#define cncblasMax(a, b) ((a) > (b) ? (a) : (b))
+#endif //cncblasMax
+
 #endif //CNCBLAS_COMMON_H

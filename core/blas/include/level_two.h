@@ -22,6 +22,11 @@ enum cncblasOperation_t {
   CNCBLAS_OP_C = 2
 };
 
+enum cncblasFillMode_t {
+  CNCBLAS_FILL_MODE_UPPER = 0,
+  CNCBLAS_FILL_MODE_LOWER = 1
+};
+
 /* |------------------------------------------------------| */
 /* |  Note: The vectors x and y must be device pointers.  | */
 /* |------------------------------------------------------| */
@@ -40,16 +45,15 @@ enum cncblasOperation_t {
  * @param ku The number of super-diagonals of the matrix A.
  * @param alpha The scalar \f$ \alpha \f$.
  * @param A The banded matrix A is stored column by column,
- *          with the main diagonal stored in row ku + 1 (starting in
- *          first position), the first superdiagonal stored in row ku
+ *          with the main diagonal stored in row ku (starting in
+ *          first position), the first superdiagonal stored in row ku-1
  *          (starting in second position), the first subdiagonal stored
- *          in row ku + 2 (starting in first position), etc. So that
+ *          in row ku+1 (starting in first position), etc. So that
  *          in general, the element A(i,j) is stored in the memory
- *          location A(ku+1+i-j,j) for j = 1,2,...,n and i
- *          in max(1,j-ku),...,min(m,j+kl). Also, the elements in the
+ *          location A(ku+i-j,j) for j = 0,1,...,min(n,m+ku) and i
+ *          in max(0,j-ku),...,min(m-1,j+kl). Also, the elements in the
  *          array A that do not conceptually correspond to the elements
- *          in the banded matrix (the top left ku x ku and bottom right
- *          kl x kl triangles) are not referenced.
+ *          in the banded matrix (the top left ku x ku) are not referenced.
  * @param x The vector x.
  * @param beta The scalar \f$ \beta \f$.
  * @param y The vector y.
@@ -70,7 +74,6 @@ void cncblasZgbmv(cncblasOperation_t trans,
                   int m, int n, int kl, int ku,
                   const cuDoubleComplex *alpha, const cuDoubleComplex *A, const cuDoubleComplex *x,
                   const cuDoubleComplex *beta, cuDoubleComplex *y);
-// TODO: Implement the function cncblas<T>gbmv
 
 /** @fn cncblas<T>gemv
  * @brief This function performs the matrix-vector multiplication
@@ -138,5 +141,19 @@ void cncblasZgeru(int m, int n,
 void cncblasZgerc(int m, int n,
                   const cuDoubleComplex *alpha, const cuDoubleComplex *x, const cuDoubleComplex *y,
                   cuDoubleComplex *A);
+
+/** @fn cncblas<T>sbmv
+ * @brief This function performs the symmetric banded matrix-vector multiplication
+ * \f$ y = \alpha \cdot A \cdot x + \beta \cdot y \f$
+ *
+ *
+ */
+void cncblasSsbmv(cncblasFillMode_t uplo, int n, int k,
+                  const float *alpha, const float *A, const float *x,
+                  const float *beta, float *y);
+void cncblasDsbmv(cncblasFillMode_t uplo, int n, int k,
+                  const double *alpha, const double *A, const double *x,
+                  const double *beta, double *y);
+// TODO: Implement the function cncblas<T>sbmv
 
 #endif
