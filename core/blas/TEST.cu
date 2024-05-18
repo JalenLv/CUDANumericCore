@@ -7,78 +7,104 @@
 #include <iomanip>
 #include <string>
 
-#define M (1 << 12)
-#define N (1 << 12)
+const int M = 1 << 10;
+const int N = 1 << 11;
+const int kl = 100;
+const int ku = 120;
+//const int M = 4;
+//const int N = 3;
+//const int kl = 1;
+//const int ku = 1;
 
 const float PI = 3.14159265358979323846;
 
 int main() {
-  // row major
-  float *h_A_row, *h_x, *h_y;
-  float *d_A_row, *d_x, *d_y;
-  // column major
-  float *h_A_col;
-  float *d_A_col;
-  // scalar
-  float alpha = rand() / (float) RAND_MAX;
+  int nColsA = cncblasMin(N, M + ku);
+  int nRowsA = ku + kl + 1;
+  cuComplex *alpha = new cuComplex(cncblasRandC);
+  cuComplex *beta = new cuComplex(cncblasRandC);
+//  cuComplex one = make_cuComplex(1.0, 0.0);
+//  cuComplex *alpha = new cuComplex(one);
+//  cuComplex *beta = new cuComplex(one);
 
-  // allocate memory
-  h_A_row = new float[M * N];
-  h_x = new float[M];
-  h_y = new float[N];
-  h_A_col = new float[M * N];
-  cudaMalloc(&d_A_row, M * N * sizeof(float));
-  cudaMalloc(&d_x, M * sizeof(float));
-  cudaMalloc(&d_y, N * sizeof(float));
-  cudaMalloc(&d_A_col, M * N * sizeof(float));
 
-  // initialize data
-  for (int row = 0; row < M; row++) {
-    for (int col = 0; col < N; col++) {
-      h_A_row[row * N + col] = rand() / (float) RAND_MAX;
-      h_A_col[col * M + row] = h_A_row[row * N + col];
+  // cncblas - 0 based
+  cuComplex *h_A_cnc, *h_x_cnc, *h_y_cnc;
+  cuComplex *d_A_cnc, *d_x_cnc, *d_y_cnc;
+  h_A_cnc = new cuComplex[nColsA * nRowsA];
+  h_x_cnc = new cuComplex[N];
+  h_y_cnc = new cuComplex[M];
+  checkCudaErrors(cudaMalloc(&d_A_cnc, nColsA * nRowsA * sizeof(cuComplex)));
+  checkCudaErrors(cudaMalloc(&d_x_cnc, N * sizeof(cuComplex)));
+  checkCudaErrors(cudaMalloc(&d_y_cnc, M * sizeof(cuComplex)));
+
+  // using gemv to verify the correctness of the cncblas implementation
+  cuComplex *h_A_gemv, *h_x_gemv, *h_y_gemv;
+  cuComplex *d_A_gemv, *d_x_gemv, *d_y_gemv;
+  h_A_gemv = new cuComplex[M * N];
+  h_x_gemv = new cuComplex[N];
+  h_y_gemv = new cuComplex[M];
+  checkCudaErrors(cudaMalloc(&d_A_gemv, M * N * sizeof(cuComplex)));
+  checkCudaErrors(cudaMalloc(&d_x_gemv, N * sizeof(cuComplex)));
+  checkCudaErrors(cudaMalloc(&d_y_gemv, M * sizeof(cuComplex)));
+
+  memset(h_A_cnc, 0, nColsA * nRowsA * sizeof(cuComplex));
+  memset(h_A_gemv, 0, M * N * sizeof(cuComplex));
+  for (int col = 0; col < nColsA; col++) {
+    for (int row = cncblasMax(0, col - ku); row <= cncblasMin(M - 1, col + kl); row++) {
+      h_A_cnc[(row - col + ku) * nColsA + col] = cncblasRandC;
+//      h_A_cnc[(row - col + ku) * nColsA + col] = one;
+      h_A_gemv[row * N + col] = h_A_cnc[(row - col + ku) * nColsA + col];
     }
-  }
-  for (int i = 0; i < M; i++) {
-    h_x[i] = rand() / (float) RAND_MAX;
   }
   for (int i = 0; i < N; i++) {
-    h_y[i] = rand() / (float) RAND_MAX;
+    h_x_cnc[i] = cncblasRandC;
+//    h_x_cnc[i] = one;
+    h_x_gemv[i] = h_x_cnc[i];
   }
+  for (int i = 0; i < M; i++) {
+    h_y_cnc[i] = cncblasRandC;
+//    h_y_cnc[i] = one;
+    h_y_gemv[i] = h_y_cnc[i];
+  }
+  checkCudaErrors(cudaMemcpy(d_A_cnc, h_A_cnc, nColsA * nRowsA * sizeof(cuComplex), cudaMemcpyHostToDevice));
+  checkCudaErrors(cudaMemcpy(d_x_cnc, h_x_cnc, N * sizeof(cuComplex), cudaMemcpyHostToDevice));
+  checkCudaErrors(cudaMemcpy(d_y_cnc, h_y_cnc, M * sizeof(cuComplex), cudaMemcpyHostToDevice));
+  checkCudaErrors(cudaMemcpy(d_A_gemv, h_A_gemv, M * N * sizeof(cuComplex), cudaMemcpyHostToDevice));
+  checkCudaErrors(cudaMemcpy(d_x_gemv, h_x_gemv, N * sizeof(cuComplex), cudaMemcpyHostToDevice));
+  checkCudaErrors(cudaMemcpy(d_y_gemv, h_y_gemv, M * sizeof(cuComplex), cudaMemcpyHostToDevice));
 
-  // copy data to device
-  cudaMemcpy(d_A_row, h_A_row, M * N * sizeof(float), cudaMemcpyHostToDevice);
-  cudaMemcpy(d_x, h_x, M * sizeof(float), cudaMemcpyHostToDevice);
-  cudaMemcpy(d_y, h_y, N * sizeof(float), cudaMemcpyHostToDevice);
-  cudaMemcpy(d_A_col, h_A_col, M * N * sizeof(float), cudaMemcpyHostToDevice);
+  // Perform gbmv using cncblas
+  cncblasCgbmv(CNCBLAS_OP_N, M, N, kl, ku, alpha, d_A_cnc, d_x_cnc, beta, d_y_cnc);
 
-  // compute ger on GPU using cublas
-  cublasHandle_t handle;
-  cublasCreate(&handle);
-  cublasSger(handle, M, N, &alpha, d_x, 1, d_y, 1, d_A_col, M);
+  // Verify the results using gemv
+  cncblasCgemv(CNCBLAS_OP_N, M, N, alpha, d_A_gemv, d_x_gemv, beta, d_y_gemv);
 
-  // compute ger on GPU using cncblas
-  cncblasSger(M, N, &alpha, d_x, d_y, d_A_row);
+  // Copy the results back
+  checkCudaErrors(cudaMemcpy(h_y_cnc, d_y_cnc, M * sizeof(cuComplex), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_y_gemv, d_y_gemv, M * sizeof(cuComplex), cudaMemcpyDeviceToHost));
 
-  // copy data back to host
-  cudaMemcpy(h_A_row, d_A_row, M * N * sizeof(float), cudaMemcpyDeviceToHost);
-  cudaMemcpy(h_A_col, d_A_col, M * N * sizeof(float), cudaMemcpyDeviceToHost);
-
-  // compare results
-  float abs_err = 0;
-  float max_err = 0;
-  for (int row = 0; row < M; row++) {
-    for (int col = 0; col < N; col++) {
-      float diff = h_A_row[row * N + col] - h_A_col[col * M + row];
-      abs_err += std::abs(diff);
-      max_err = std::max(max_err, std::abs(diff));
+  // Check the results
+  for (int i = 0; i < M; i++) {
+    if (!cncblasComplexIsEqual(h_y_cnc + i, h_y_gemv + i)) {
+      std::cout << "Results do not match at " << i << std::endl;
     }
   }
 
-  // print results
-  std::cout << std::fixed << std::setprecision(6);
-  std::cout << "Absolute error: " << abs_err << std::endl;
-  std::cout << "Max error: " << max_err << std::endl;
-
+  // Free the memory
+  delete[] h_A_cnc;
+  delete[] h_x_cnc;
+  delete[] h_y_cnc;
+  delete[] h_A_gemv;
+  delete[] h_x_gemv;
+  delete[] h_y_gemv;
+  delete alpha;
+  delete beta;
+  checkCudaErrors(cudaFree(d_A_cnc));
+  checkCudaErrors(cudaFree(d_x_cnc));
+  checkCudaErrors(cudaFree(d_y_cnc));
+  checkCudaErrors(cudaFree(d_A_gemv));
+  checkCudaErrors(cudaFree(d_x_gemv));
+  checkCudaErrors(cudaFree(d_y_gemv));
   return 0;
 }
