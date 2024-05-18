@@ -16,7 +16,7 @@ By now, CNC implements the following sub-libraries:
 ---
 
 ___Note: If you encounter any problems during the installation, please feel free to open an issue, or contact me
-at [this email](sejalenlv@mail.scut.edu.cn). I will try my best to help you.___
+at [this email](mailto:sejalenlv@mail.scut.edu.cn). I will try my best to help you.___
 
 ---
 
