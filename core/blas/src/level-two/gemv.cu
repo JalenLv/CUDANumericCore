@@ -44,6 +44,10 @@ void cncblasSgemv(cncblasOperation_t trans,
                   const float *beta, float *y) {
   // Test for invalid parameters
   gemvParamErrorCheck(m, n, alpha, A, x, beta, y);
+  if (trans == CNCBLAS_OP_C) {
+    std::cerr << "Invalid value for `trans`" << std::endl;
+    exit(1);
+  }
   // Preprocess scalar pointers
   float *h_alpha, *h_beta, *d_alpha, *d_beta;
   cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
@@ -97,6 +101,10 @@ void cncblasDgemv(cncblasOperation_t trans,
                   const double *beta, double *y) {
   // Test for invalid parameters
   gemvParamErrorCheck(m, n, alpha, A, x, beta, y);
+  if (trans == CNCBLAS_OP_C) {
+    std::cerr << "Invalid value for `trans`" << std::endl;
+    exit(1);
+  }
   // Preprocess scalar pointers
   double *h_alpha, *h_beta, *d_alpha, *d_beta;
   cncblasScalarPointerPreprocess(alpha, h_alpha, d_alpha);
