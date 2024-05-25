@@ -7,7 +7,7 @@
 const size_t BLOCK_SIZE = 256;
 
 template<typename T>
-__global__ void cnblasSwapKernel(size_t n, T *x, T *y) {
+__global__ void cncblasSwapKernel(size_t n, T *x, T *y) {
   size_t i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n) {
     T temp = x[i];
@@ -33,7 +33,7 @@ void cncblasSwap(size_t n, T *x, T *y) {
 
   // Launch the kernel
   size_t GRID_SIZE = (n + BLOCK_SIZE - 1) / BLOCK_SIZE;
-  cnblasSwapKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, x, y);
+  cncblasSwapKernel<<<GRID_SIZE, BLOCK_SIZE>>>(n, x, y);
 }
 
 // Explicit instantiations
