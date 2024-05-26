@@ -1,0 +1,440 @@
+  void iamax_kernel<int, float, float, (int)256>(cublasIamaxParams<T1, T2, T3>) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.12
+  void iamax_kernel<int, float, float, (int)256>(cublasIamaxParams<T1, T2, T3>) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.66
+  cncblasSamaxKernel(unsigned long, const float *, float *, unsigned long *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.50
+  cncblasSamaxKernel(unsigned long, const float *, float *, unsigned long *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.26
+  void iamax_kernel<int, double, double, (int)256>(cublasIamaxParams<T1, T2, T3>) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.11
+  void iamax_kernel<int, double, double, (int)256>(cublasIamaxParams<T1, T2, T3>) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.34
+  cncblasDamaxKernel(unsigned long, const double *, double *, unsigned long *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         7.30
+  cncblasDamaxKernel(unsigned long, const double *, double *, unsigned long *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.90
+  void iamax_kernel<int, float2, float, (int)256>(cublasIamaxParams<T1, T2, T3>) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.28
+  void iamax_kernel<int, float, float, (int)256>(cublasIamaxParams<T1, T2, T3>) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.92
+  cncblasCamaxKernel(unsigned long, const float2 *, float *, unsigned long *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.62
+  cncblasSamaxKernel(unsigned long, const float *, float *, unsigned long *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.26
+  void iamax_kernel<int, double2, double, (int)128>(cublasIamaxParams<T1, T2, T3>) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.89
+  void iamax_kernel<int, double, double, (int)128>(cublasIamaxParams<T1, T2, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.30
+  cncblasZamaxKernel(unsigned long, const double2 *, double *, unsigned long *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         7.23
+  cncblasDamaxKernel(unsigned long, const double *, double *, unsigned long *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.86
+  void iamin_kernel<int, float, float, (int)256>(cublasIaminParams<T1, T2, T3>) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.09
+  void iamin_kernel<int, float, float, (int)256>(cublasIaminParams<T1, T2, T3>) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.11
+  cncblasSaminKernel(unsigned long, const float *, float *, unsigned long *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.56
+  cncblasSaminKernel(unsigned long, const float *, float *, unsigned long *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.32
+  void iamin_kernel<int, double, double, (int)128>(cublasIaminParams<T1, T2, T3>) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.95
+  void iamin_kernel<int, double, double, (int)128>(cublasIaminParams<T1, T2, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.27
+  cncblasDaminKernel(unsigned long, const double *, double *, unsigned long *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        10.46
+  cncblasDaminKernel(unsigned long, const double *, double *, unsigned long *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.08
+  void iamin_kernel<int, float2, float, (int)128>(cublasIaminParams<T1, T2, T3>) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.25
+  void iamin_kernel<int, float, float, (int)128>(cublasIaminParams<T1, T2, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.41
+  cncblasCaminKernel(unsigned long, const float2 *, float *, unsigned long *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.46
+  cncblasSaminKernel(unsigned long, const float *, float *, unsigned long *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.22
+  void iamin_kernel<int, double2, double, (int)128>(cublasIaminParams<T1, T2, T3>) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.11
+  void iamin_kernel<int, double, double, (int)128>(cublasIaminParams<T1, T2, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.96
+  cncblasZaminKernel(unsigned long, const double2 *, double *, unsigned long *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         7.20
+  cncblasDaminKernel(unsigned long, const double *, double *, unsigned long *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         9.50
+  void asum_kernel<int, float, float>(cublasAsumParams<T2, T3>) (144, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.18
+  void asum_kernel<int, float, float>(cublasAsumParams<T2, T3>) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.90
+  cncblasSasumKernel(unsigned long, const float *, float *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.54
+  cncblasSasumKernel(unsigned long, const float *, float *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        20.42
+  void asum_kernel<int, double, double>(cublasAsumParams<T2, T3>) (288, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         8.74
+  void asum_kernel<int, double, double>(cublasAsumParams<T2, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.15
+  cncblasDasumKernel(unsigned long, const double *, double *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         7.26
+  cncblasDasumKernel(unsigned long, const double *, double *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.70
+  void asum_kernel<int, float2, float>(cublasAsumParams<T2, T3>) (288, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.96
+  void asum_kernel<int, float, float>(cublasAsumParams<T2, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.48
+  cncblasCasumKernel(unsigned long, const float2 *, float *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.50
+  cncblasSasumKernel(unsigned long, const float *, float *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.79
+  void asum_kernel<int, double2, double>(cublasAsumParams<T2, T3>) (288, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         8.64
+  void asum_kernel<int, double, double>(cublasAsumParams<T2, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.15
+  cncblasZasumKernel(unsigned long, const double2 *, double *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        43.78
+  cncblasDasumKernel(unsigned long, const double *, double *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.41
+  void axpy_kernel_val<float, float>(cublasAxpyParamsVal<T1, T1, T2>) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.30
+  cncblasSaxpyKernel(unsigned long, float *, const float *, float *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.07
+  void axpy_kernel_val<double, double>(cublasAxpyParamsVal<T1, T1, T2>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.58
+  cncblasDaxpyKernel(unsigned long, double *, const double *, double *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.82
+  void axpy_kernel_val<float2, float2>(cublasAxpyParamsVal<T1, T1, T2>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.16
+  cncblasCaxpyKernel(unsigned long, float2 *, const float2 *, float2 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        18.88
+  void axpy_kernel_val<double2, double2>(cublasAxpyParamsVal<T1, T1, T2>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.64
+  cncblasZaxpyKernel(unsigned long, double2 *, const double2 *, double2 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond            4
+  void copy_kernel<float>(cublasCopyParams<T1>) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.39
+  void copy_kernel<double>(cublasCopyParams<T1>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.30
+  void copy_kernel<float2>(cublasCopyParams<T1>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.76
+  void copy_kernel<double2>(cublasCopyParams<T1>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.42
+  void dot_kernel<float, (int)128, (int)0, cublasDotParams<cublasGemvTensor<const float>, cublasGemvTensorStridedBatched<float>>>(T4) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.78
+  void reduce_1Block_kernel<float, (int)128, (int)7, cublasGemvTensorStridedBatched<float>, cublasGemvTensorStridedBatched<float>, cublasGemvTensorStridedBatched<float>>(const T1 *, T1, T4, int, const T1 *, T1, T5, T6, cublasPointerMode_t, cublasLtEpilogue_t, cublasGemvTensorStridedBatched<const biasType<T6::value_type, T1>::type>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.52
+  cncblasSdotKernel_1(unsigned long, const float *, const float *, float *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.58
+  cncblasSdotKernel_2(unsigned long, const float *, float *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.46
+  void dot_kernel<double, (int)128, (int)0, cublasDotParams<cublasGemvTensor<const double>, cublasGemvTensorStridedBatched<double>>>(T4) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.64
+  void reduce_1Block_kernel<double, (int)128, (int)7, cublasGemvTensorStridedBatched<double>, cublasGemvTensorStridedBatched<double>, cublasGemvTensorStridedBatched<double>>(const T1 *, T1, T4, int, const T1 *, T1, T5, T6, cublasPointerMode_t, cublasLtEpilogue_t, cublasGemvTensorStridedBatched<const biasType<T6::value_type, T1>::type>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.22
+  cncblasDdotKernel_1(unsigned long, const double *, const double *, double *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         7.42
+  cncblasDdotKernel_2(unsigned long, const double *, double *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.70
+  void dot_kernel<float2, (int)128, (int)0, cublasDotParams<cublasGemvTensor<const float2>, cublasGemvTensorStridedBatched<float2>>>(T4) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.94
+  void reduce_1Block_kernel<float2, (int)128, (int)7, cublasGemvTensorStridedBatched<float2>, cublasGemvTensorStridedBatched<float2>, cublasGemvTensorStridedBatched<float2>>(const T1 *, T1, T4, int, const T1 *, T1, T5, T6, cublasPointerMode_t, cublasLtEpilogue_t, cublasGemvTensorStridedBatched<const biasType<T6::value_type, T1>::type>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.49
+  cncblasCdotuKernel_1(unsigned long, const float2 *, const float2 *, float2 *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.18
+  cncblasCdotuKernel_2(unsigned long, const float2 *, float2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.71
+  void dot_kernel<float2, (int)128, (int)1, cublasDotParams<cublasGemvTensor<const float2>, cublasGemvTensorStridedBatched<float2>>>(T4) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.97
+  void reduce_1Block_kernel<float2, (int)128, (int)7, cublasGemvTensorStridedBatched<float2>, cublasGemvTensorStridedBatched<float2>, cublasGemvTensorStridedBatched<float2>>(const T1 *, T1, T4, int, const T1 *, T1, T5, T6, cublasPointerMode_t, cublasLtEpilogue_t, cublasGemvTensorStridedBatched<const biasType<T6::value_type, T1>::type>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.46
+  cncblasCdotcKernel_1(unsigned long, const float2 *, const float2 *, float2 *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.18
+  cncblasCdotcKernel_2(unsigned long, const float2 *, float2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.71
+  void dot_kernel<double2, (int)64, (int)0, cublasDotParams<cublasGemvTensor<const double2>, cublasGemvTensorStridedBatched<double2>>>(T4) (64, 1, 1)x(64, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.57
+  void reduce_1Block_kernel<double2, (int)64, (int)6, cublasGemvTensorStridedBatched<double2>, cublasGemvTensorStridedBatched<double2>, cublasGemvTensorStridedBatched<double2>>(const T1 *, T1, T4, int, const T1 *, T1, T5, T6, cublasPointerMode_t, cublasLtEpilogue_t, cublasGemvTensorStridedBatched<const biasType<T6::value_type, T1>::type>) (1, 1, 1)x(64, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.45
+  cncblasZdotuKernel_1(unsigned long, const double2 *, const double2 *, double2 *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        11.87
+  cncblasZdotuKernel_2(unsigned long, const double2 *, double2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.15
+  void dot_kernel<double2, (int)64, (int)1, cublasDotParams<cublasGemvTensor<const double2>, cublasGemvTensorStridedBatched<double2>>>(T4) (64, 1, 1)x(64, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.82
+  void reduce_1Block_kernel<double2, (int)64, (int)6, cublasGemvTensorStridedBatched<double2>, cublasGemvTensorStridedBatched<double2>, cublasGemvTensorStridedBatched<double2>>(const T1 *, T1, T4, int, const T1 *, T1, T5, T6, cublasPointerMode_t, cublasLtEpilogue_t, cublasGemvTensorStridedBatched<const biasType<T6::value_type, T1>::type>) (1, 1, 1)x(64, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.45
+  cncblasZdotcKernel_1(unsigned long, const double2 *, const double2 *, double2 *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        11.90
+  cncblasZdotcKernel_2(unsigned long, const double2 *, double2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.12
+  void nrm2_kernel<float, float, float, (int)1, (int)0, (int)128>(cublasNrm2Params<int, T1, T3>) (288, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.57
+  void nrm2_kernel<float, float, float, (int)1, (int)0, (int)128>(cublasNrm2Params<int, T1, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.95
+  cncblasSdotKernel_1(unsigned long, const float *, const float *, float *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.74
+  cncblasSdotKernel_2(unsigned long, const float *, float *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.94
+  void nrm2_kernel<double, double, double, (int)0, (int)0, (int)128>(cublasNrm2Params<int, T1, T3>) (288, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        56.32
+  void nrm2_kernel<double, double, double, (int)0, (int)0, (int)128>(cublasNrm2Params<int, T1, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        25.73
+  cncblasDdotKernel_1(unsigned long, const double *, const double *, double *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         7.42
+  cncblasDdotKernel_2(unsigned long, const double *, double *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.06
+  void nrm2_kernel<float2, float, float, (int)1, (int)1, (int)128>(cublasNrm2Params<int, T1, T3>) (288, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.63
+  void nrm2_kernel<float, float, float, (int)1, (int)0, (int)128>(cublasNrm2Params<int, T1, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.86
+  cncblasCdotcKernel_1(unsigned long, const float2 *, const float2 *, float2 *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.15
+  cncblasCdotcKernel_2(unsigned long, const float2 *, float2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        19.23
+  void nrm2_kernel<double2, double, double, (int)0, (int)1, (int)128>(cublasNrm2Params<int, T1, T3>) (240, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        51.90
+  void nrm2_kernel<double, double, double, (int)0, (int)0, (int)128>(cublasNrm2Params<int, T1, T3>) (1, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        25.34
+  cncblasZdotcKernel_1(unsigned long, const double2 *, const double2 *, double2 *) (256, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        11.94
+  cncblasZdotcKernel_2(unsigned long, const double2 *, double2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.09
+  void rot_kernel_val<float, float, float, float>(cublasRotParamsVal<T1, T2, T3>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.06
+  cncblasSrot_kernel(unsigned long, float *, float *, const float *, const float *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.23
+  void rot_kernel_val<double, double, double, double>(cublasRotParamsVal<T1, T2, T3>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.70
+  cncblasDrot_kernel(unsigned long, double *, double *, const double *, const double *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.32
+  void scal_kernel_val<float, float>(cublasScalParamsVal<T1, T2>) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.07
+  cncblasSscalKernel(unsigned long, const float *, float *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         2.94
+  void scal_kernel_val<double, double>(cublasScalParamsVal<T1, T2>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.39
+  cncblasDscalKernel(unsigned long, const double *, double *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.38
+  void scal_kernel_val<float2, float2>(cublasScalParamsVal<T1, T2>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.23
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.14
+  void scal_kernel_val<double2, double2>(cublasScalParamsVal<T1, T2>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.94
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.87
+  void scal_kernel_val<float2, float>(cublasScalParamsVal<T1, T2>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.10
+  cncblasCsscalKernel(unsigned long, const float *, float2 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.14
+  void scal_kernel_val<double2, double>(cublasScalParamsVal<T1, T2>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.10
+  cncblasZdscalKernel(unsigned long, const double *, double2 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.65
+  void swap_kernel<float>(cublasSwapParams<T1>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.69
+  void cncblasSwapKernel<float>(unsigned long, T1 *, T1 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.07
+  void swap_kernel<double>(cublasSwapParams<T1>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.51
+  void cncblasSwapKernel<double>(unsigned long, T1 *, T1 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.23
+  void swap_kernel<float2>(cublasSwapParams<T1>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.19
+  void cncblasSwapKernel<float2>(unsigned long, T1 *, T1 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.26
+  void swap_kernel<double2>(cublasSwapParams<T1>) (11, 1, 1)x(384, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.32
+  void cncblasSwapKernel<double2>(unsigned long, T1 *, T1 *) (16, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        16.83
+  cncblasSscalKernel(unsigned long, const float *, float *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        17.28
+  cncblasSgbmvKernelN(int, int, int, int, const float *, const float *, const float *, float *) (4, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         7.78
+  cncblasSscalKernel(unsigned long, const float *, float *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         2.91
+  cncblasSgemvKernelN(int, int, const float *, const float *, const float *, float *) (1024, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        51.33
+  cncblasSscalKernel(unsigned long, const float *, float *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.44
+  cncblasSgbmvKernelT(int, int, int, int, const float *, const float *, const float *, float *) (5, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         9.41
+  cncblasSscalKernel(unsigned long, const float *, float *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         2.94
+  cncblasSgemvKernelT(int, int, const float *, const float *, const float *, float *) (8, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        49.76
+  cncblasDscalKernel(unsigned long, const double *, double *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.10
+  cncblasDgbmvKernelN(int, int, int, int, const double *, const double *, const double *, double *) (4, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        13.70
+  cncblasDscalKernel(unsigned long, const double *, double *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.50
+  cncblasDgemvKernelN(int, int, const double *, const double *, const double *, double *) (1024, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        98.05
+  cncblasDscalKernel(unsigned long, const double *, double *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.04
+  cncblasDgbmvKernelT(int, int, int, int, const double *, const double *, const double *, double *) (5, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        14.82
+  cncblasDscalKernel(unsigned long, const double *, double *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.20
+  cncblasDgemvKernelT(int, int, const double *, const double *, const double *, double *) (8, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        95.84
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.01
+  cncblasCgbmvKernelN_phase1(int, int, int, int, const float2 *, const float2 *, const float2 *, float2 *) (4, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        12.06
+  cncblasCgbmvKernelN_phase2(int, const float2 *, float2 *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.96
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.01
+  cncblasCgemvKernelN(int, int, const float2 *, const float2 *, const float2 *, float2 *) (1024, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        97.89
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         2.98
+  cncblasCgbmvKernelT_phase1(int, int, int, int, const float2 *, const float2 *, const float2 *, float2 *) (5, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        13.70
+  cncblasCgbmvKernelT_phase2(int, const float2 *, float2 *) (5, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.54
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.04
+  cncblasCgemvKernelT_1(int, int, const float2 *, const float2 *, const float2 *, float2 *) (8, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond       204.48
+  cncblasCgemvKernelT_2(int, const float2 *, float2 *) (2048, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        12.10
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         2.94
+  cncblasCgbmvKernelC_phase1(int, int, int, int, const float2 *, const float2 *, const float2 *, float2 *) (5, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        13.76
+  cncblasCgbmvKernelC_phase2(int, const float2 *, float2 *) (5, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.28
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.10
+  cncblasCgemvKernelC_1(int, int, const float2 *, const float2 *, const float2 *, float2 *) (8, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond           92
+  cncblasCgemvKernelC_2(int, const float2 *, float2 *) (2048, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        11.78
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.62
+  cncblasZgbmvKernelN_phase1(int, int, int, int, const double2 *, const double2 *, const double2 *, double2 *) (4, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        37.92
+  cncblasZgbmvKernelN_phase2(int, const double2 *, double2 *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        11.97
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.58
+  cncblasZgemvKernelN(int, int, const double2 *, const double2 *, const double2 *, double2 *) (1024, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond       305.18
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.58
+  cncblasZgbmvKernelT_phase1(int, int, int, int, const double2 *, const double2 *, const double2 *, double2 *) (5, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        43.49
+  cncblasZgbmvKernelT_phase2(int, const double2 *, double2 *) (5, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        11.97
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.28
+  cncblasZgemvKernelT_1(int, int, const double2 *, const double2 *, const double2 *, double2 *) (8, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond       394.82
+  cncblasZgemvKernelT_2(int, const double2 *, double2 *) (2048, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        24.35
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.49
+  cncblasZgbmvKernelC_phase1(int, int, int, int, const double2 *, const double2 *, const double2 *, double2 *) (5, 32, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        38.78
+  cncblasZgbmvKernelC_phase2(int, const double2 *, double2 *) (5, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond           12
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (8, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.46
+  cncblasZgemvKernelC_1(int, int, const double2 *, const double2 *, const double2 *, double2 *) (8, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond       396.10
+  cncblasZgemvKernelC_2(int, const double2 *, double2 *) (2048, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        24.80
+  void gemvNSP_kernel<float, float, float, float, (int)1, (int)16, (int)4, (int)1024, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<float>, float>>(T10) (32, 1, 1)x(32, 16, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        11.17
+  cncblasSscalKernel(unsigned long, const float *, float *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.32
+  cncblasSgemvKernelN(int, int, const float *, const float *, const float *, float *) (1024, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        18.85
+  void gemv2N_kernel<int, int, double, double, double, double, (int)128, (int)4, (int)4, (int)4, (int)1, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const double>, cublasGemvTensorStridedBatched<const double>, cublasGemvTensorStridedBatched<double>, double>>(T13) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        17.73
+  cncblasDscalKernel(unsigned long, const double *, double *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.18
+  cncblasDgemvKernelN(int, int, const double *, const double *, const double *, double *) (1024, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        34.24
+  ampere_cgemm_64x32_nn (16, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        36.96
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.04
+  cncblasCgemvKernelN(int, int, const float2 *, const float2 *, const float2 *, float2 *) (1024, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        20.99
+  void gemvNSP_kernel<double2, double2, double2, double2, (int)1, (int)32, (int)4, (int)1024, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const double2>, cublasGemvTensorStridedBatched<const double2>, cublasGemvTensorStridedBatched<double2>, double2>>(T10) (128, 1, 1)x(8, 32, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        38.14
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (4, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.46
+  cncblasZgemvKernelN(int, int, const double2 *, const double2 *, const double2 *, double2 *) (1024, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        74.30
+  std::enable_if<!T7, void>::type internal::gemvx::kernel<int, int, float, float, float, float, (bool)0, (bool)1, (bool)1, (bool)0, (int)9, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<float>, float>>(T13) (16, 1, 1)x(32, 16, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         9.89
+  cncblasSscalKernel(unsigned long, const float *, float *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         2.98
+  cncblasSgemvKernelT(int, int, const float *, const float *, const float *, float *) (1, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        27.04
+  void gemv2T_kernel_val<int, int, double, double, double, double, (int)128, (int)16, (int)4, (int)4, (bool)0, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const double>, cublasGemvTensorStridedBatched<const double>, cublasGemvTensorStridedBatched<double>, double>>(T13, T6, T6) (32, 1, 1)x(128, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        20.83
+  cncblasDscalKernel(unsigned long, const double *, double *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.07
+  cncblasDgemvKernelT(int, int, const double *, const double *, const double *, double *) (1, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        34.05
+  std::enable_if<!T7, void>::type internal::gemvx::kernel<int, int, float2, float2, float2, float2, (bool)0, (bool)1, (bool)1, (bool)0, (int)7, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const float2>, cublasGemvTensorStridedBatched<const float2>, cublasGemvTensorStridedBatched<float2>, float2>>(T13) (32, 1, 1)x(16, 8, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        16.70
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.04
+  cncblasCgemvKernelT_1(int, int, const float2 *, const float2 *, const float2 *, float2 *) (1, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        35.46
+  cncblasCgemvKernelT_2(int, const float2 *, float2 *) (256, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.64
+  std::enable_if<!T7, void>::type internal::gemvx::kernel<int, int, double2, double2, double2, double2, (bool)0, (bool)1, (bool)1, (bool)0, (int)6, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const double2>, cublasGemvTensorStridedBatched<const double2>, cublasGemvTensorStridedBatched<double2>, double2>>(T13) (64, 1, 1)x(16, 4, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        31.94
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.52
+  cncblasZgemvKernelT_1(int, int, const double2 *, const double2 *, const double2 *, double2 *) (1, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond       198.75
+  cncblasZgemvKernelT_2(int, const double2 *, double2 *) (256, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.05
+  std::enable_if<!T7, void>::type internal::gemvx::kernel<int, int, float2, float2, float2, float2, (bool)0, (bool)1, (bool)1, (bool)1, (int)7, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const float2>, cublasGemvTensorStridedBatched<const float2>, cublasGemvTensorStridedBatched<float2>, float2>>(T13) (32, 1, 1)x(16, 8, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        15.33
+  cncblasCscalKernel(unsigned long, const float2 *, float2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         3.04
+  cncblasCgemvKernelC_1(int, int, const float2 *, const float2 *, const float2 *, float2 *) (1, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        36.74
+  cncblasCgemvKernelC_2(int, const float2 *, float2 *) (256, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         4.67
+  std::enable_if<!T7, void>::type internal::gemvx::kernel<int, int, double2, double2, double2, double2, (bool)0, (bool)1, (bool)1, (bool)1, (int)6, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const double2>, cublasGemvTensorStridedBatched<const double2>, cublasGemvTensorStridedBatched<double2>, double2>>(T13) (64, 1, 1)x(16, 4, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        32.61
+  cncblasZscalKernel(unsigned long, const double2 *, double2 *) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         5.41
+  cncblasZgemvKernelC_1(int, int, const double2 *, const double2 *, const double2 *, double2 *) (1, 4, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond       198.62
+  cncblasZgemvKernelC_2(int, const double2 *, double2 *) (256, 1, 1)x(32, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond         6.18
+  void ger_kernel<float, float, (int)256, (int)5, (bool)0>(cublasGerParams<T1, T2>) (32, 8, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        10.24
+  cncblasSgerKernel(int, int, const float *, const float *, const float *, float *) (8, 64, 1)x(32, 16, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        10.21
+  void ger_kernel<double, double, (int)256, (int)5, (bool)0>(cublasGerParams<T1, T2>) (32, 8, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        16.96
+  cncblasDgerKernel(int, int, const double *, const double *, const double *, double *) (8, 64, 1)x(32, 16, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        15.17
+  void ger_kernel<float2, float2, (int)256, (int)5, (bool)0>(cublasGerParams<T1, T2>) (32, 8, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        16.42
+  cncblasCgeruKernel(int, int, const float2 *, const float2 *, const float2 *, float2 *) (8, 64, 1)x(32, 16, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        15.17
+  void ger_kernel<double2, double2, (int)256, (int)5, (bool)0>(cublasGerParams<T1, T2>) (32, 8, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        33.79
+  cncblasZgeruKernel(int, int, const double2 *, const double2 *, const double2 *, double2 *) (8, 64, 1)x(32, 16, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        58.56
+  void ger_kernel<float2, float2, (int)256, (int)5, (bool)1>(cublasGerParams<T1, T2>) (32, 8, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        16.77
+  cncblasCgercKernel(int, int, const float2 *, const float2 *, const float2 *, float2 *) (8, 64, 1)x(32, 16, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        16.29
+  void ger_kernel<double2, double2, (int)256, (int)5, (bool)1>(cublasGerParams<T1, T2>) (32, 8, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        31.71
+  cncblasZgercKernel(int, int, const double2 *, const double2 *, const double2 *, double2 *) (8, 64, 1)x(32, 16, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Duration                      usecond        58.53
